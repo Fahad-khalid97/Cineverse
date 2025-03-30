@@ -1,0 +1,53 @@
+import 'package:cineverse/core/config/env_config.dart';
+
+class ApiConstants {
+  static const String baseUrl = 'https://api.themoviedb.org/3';
+
+  // Use environment variables instead of hardcoded values
+  static String get apiKey => EnvConfig.apiKey;
+  static String get bearerToken => EnvConfig.bearerToken;
+
+  // Image URLs
+  static const String imageBaseUrl = 'https://image.tmdb.org/t/p/';
+  static const String smallImageSize = 'w200';
+  static const String mediumImageSize = 'w400';
+  static const String largeImageSize = 'w780';
+  static const String originalImageSize = 'original';
+
+  // Endpoints
+  static const String authTokenNew = '/authentication/token/new';
+  static const String authValidateWithLogin =
+      '/authentication/token/validate_with_login';
+  static const String authCreateSession = '/authentication/session/new';
+  static const String authDeleteSession = '/authentication/session';
+
+  static const String accountDetails = '/account';
+  static const String accountWatchlist =
+      '/account/{account_id}/watchlist/movies';
+  static const String accountAddWatchlist = '/account/{account_id}/watchlist';
+  static const String accountFavorites =
+      '/account/{account_id}/favorite/movies';
+  static const String accountMarkFavorite = '/account/{account_id}/favorite';
+
+  static const String moviePopular = '/movie/popular';
+  static const String movieTopRated = '/movie/top_rated';
+  static const String movieNowPlaying = '/movie/now_playing';
+  static const String movieUpcoming = '/movie/upcoming';
+  static const String movieDetails = '/movie/{movie_id}';
+  static const String movieCredits = '/movie/{movie_id}/credits';
+  static const String movieVideos = '/movie/{movie_id}/videos';
+  static const String movieSimilar = '/movie/{movie_id}/similar';
+  static const String movieReviews = '/movie/{movie_id}/reviews';
+  static const String movieRecommendations =
+      '/movie/{movie_id}/recommendations';
+  static const String movieRating = '/movie/{movie_id}/rating';
+
+  static const String searchMovie = '/search/movie';
+  static const String discoverMovie = '/discover/movie';
+  static const String genreList = '/genre/movie/list';
+
+  static const String configuration = '/configuration';
+  static const String configurationLanguages = '/configuration/languages';
+  static const String configurationCountries = '/configuration/countries';
+  static const String configurationTimezones = '/configuration/timezones';
+}

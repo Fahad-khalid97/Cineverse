@@ -1,0 +1,55 @@
+import Flutter
+
+import UIKit
+
+class DeviceInfoPlugin: NSObject, FlutterPlugin {
+
+    static let CHANNEL = "cineverse/device_info"
+
+    static func register(with registrar: FlutterPluginRegistrar) {
+
+        let channel = FlutterMethodChannel(name: CHANNEL, binaryMessenger: registrar.messenger())
+        let instance = DeviceInfoPlugin()
+
+        registrar.addMethodCallDelegate(instance, channel: channel)
+    }
+
+    func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        if call.method == "getDeviceInfo" {
+            result(getDeviceInfo())
+        } else {
+            result(FlutterMethodNotImplemented)
+        }
+
+    }
+
+    private func getDeviceInfo() -> [String: String] {
+
+        let device = UIDevice.current
+        let storage = getAvailableStorage()
+
+        return [
+            "deviceModel": device.model,
+            "osVersion": "iOS \(device.systemVersion)",
+            "availableStorage": "\(storage) MB",
+            "batteryLevel": "\(getBatteryLevel())%"
+        ]
+    }
+
+    private func getBatteryLevel() -> Int {
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        return Int(UIDevice.current.batteryLevel * 100)
+    }
+
+    private func getAvailableStorage() -> Int {
+        let fileManager = FileManager.default
+
+        if let attributes = try? fileManager.attributesOfFileSystem(forPath: NSHomeDirectory()),
+           let freeSize = attributes[.systemFreeSize] as? Int64 {
+            return Int(freeSize / (1024 * 1024)) // Convert to MB
+        }
+        return 0
+
+    }
+
+}
