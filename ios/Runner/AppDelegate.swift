@@ -9,8 +9,9 @@ import UIKit
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
 
-    // Register the DeviceInfoPlugin
-    DeviceInfoPlugin.register(with: self.flutterEngine!.registrar(forPlugin: "DeviceInfoPlugin")!)
+    if let registrar = self.registrar(forPlugin: "DeviceInfoPlugin") {
+      DeviceInfoPlugin.register(with: registrar)
+    }
     
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

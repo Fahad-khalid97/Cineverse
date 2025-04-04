@@ -9,9 +9,11 @@ import '../../models/account/movie_list_resp.dart';
 
 part 'account_api.g.dart';
 
+@injectable
 @RestApi()
 abstract class AccountAPI {
-  factory AccountAPI(Dio dio, {String? baseUrl}) = _AccountAPI;
+  @factoryMethod
+  factory AccountAPI(Dio dio) = _AccountAPI;
 
   @GET(ApiConstants.accountDetails)
   Future<AccountDetailsModel> getAccountDetails({

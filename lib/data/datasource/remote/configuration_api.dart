@@ -10,9 +10,11 @@ import '../../models/configuration/configuration_model.dart';
 
 part 'configuration_api.g.dart';
 
+@injectable
 @RestApi()
 abstract class ConfigurationAPI {
-  factory ConfigurationAPI(Dio dio, {String? baseUrl}) = _ConfigurationAPI;
+  @factoryMethod
+  factory ConfigurationAPI(Dio dio) = _ConfigurationAPI;
 
   @GET(ApiConstants.configuration)
   Future<ConfigurationModel> getApiConfiguration();

@@ -26,6 +26,8 @@ import 'package:cineverse/data/repo/auth_repo.dart' as _i699;
 import 'package:cineverse/data/repo/configuration_repo.dart' as _i1049;
 import 'package:cineverse/data/repo/movie_repo.dart' as _i769;
 import 'package:cineverse/data/repo/search_repo.dart' as _i518;
+import 'package:cineverse/features/auth/login/bloc/login_cubit.dart' as _i487;
+import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -40,18 +42,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i152.AuthInterceptor>(() => _i152.AuthInterceptor());
     gh.lazySingleton<_i113.CacheInterceptor>(() => _i113.CacheInterceptor());
     gh.lazySingleton<_i162.AppRouter>(() => _i162.AppRouter());
-    gh.lazySingleton<_i769.MoviesRepo>(
-      () => _i769.MoviesRepo(gh<_i968.MoviesAPI>()),
+    gh.factory<_i1072.AuthAPI>(() => _i1072.AuthAPI(gh<_i361.Dio>()));
+    gh.factory<_i968.MoviesAPI>(() => _i968.MoviesAPI(gh<_i361.Dio>()));
+    gh.factory<_i926.AccountAPI>(() => _i926.AccountAPI(gh<_i361.Dio>()));
+    gh.factory<_i494.ConfigurationAPI>(
+      () => _i494.ConfigurationAPI(gh<_i361.Dio>()),
     );
-    gh.lazySingleton<_i1049.ConfigurationRepo>(
-      () => _i1049.ConfigurationRepo(gh<_i494.ConfigurationAPI>()),
-    );
+    gh.factory<_i856.SearchAPI>(() => _i856.SearchAPI(gh<_i361.Dio>()));
     gh.lazySingleton<_i944.AccountRepo>(
       () => _i944.AccountRepo(gh<_i926.AccountAPI>()),
     );
-    gh.lazySingleton<_i699.AuthRepo>(
-      () => _i699.AuthRepo(gh<_i1072.AuthAPI>()),
-    );
+    gh.factory<_i699.AuthRepo>(() => _i699.AuthRepo(gh<_i1072.AuthAPI>()));
+    gh.factory<_i487.LoginCubit>(() => _i487.LoginCubit(gh<_i699.AuthRepo>()));
     gh.lazySingleton<_i518.SearchRepo>(
       () => _i518.SearchRepo(gh<_i856.SearchAPI>()),
     );
@@ -60,6 +62,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i152.AuthInterceptor>(),
         gh<_i113.CacheInterceptor>(),
       ),
+    );
+    gh.lazySingleton<_i769.MoviesRepo>(
+      () => _i769.MoviesRepo(gh<_i968.MoviesAPI>()),
+    );
+    gh.lazySingleton<_i1049.ConfigurationRepo>(
+      () => _i1049.ConfigurationRepo(gh<_i494.ConfigurationAPI>()),
     );
     return this;
   }

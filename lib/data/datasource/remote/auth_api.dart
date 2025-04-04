@@ -9,9 +9,11 @@ import '../../models/auth/session_delete_model.dart';
 
 part 'auth_api.g.dart';
 
+@injectable
 @RestApi()
 abstract class AuthAPI {
-  factory AuthAPI(Dio dio, {String? baseUrl}) = _AuthAPI;
+  @factoryMethod
+  factory AuthAPI(Dio dio) = _AuthAPI;
 
   @GET(ApiConstants.authTokenNew)
   Future<AuthResponse> createRequestToken();

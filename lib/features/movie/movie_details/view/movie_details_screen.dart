@@ -1,11 +1,12 @@
 import 'package:cineverse/theme/app_colors.dart';
 import 'package:cineverse/theme/app_fonts.dart';
 import 'package:cineverse/theme/app_images.dart';
-import 'package:cineverse/theme/app_theme.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:linear_progress_bar/linear_progress_bar.dart';
+import '../widget/dumb_widget/cast_member_card.dart';
+import '../../../../widget/dumb_widget/chip.dart';
+import '../widget/dumb_widget/rating_progress_bar.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   const MovieDetailsScreen({super.key, this.movieId});
@@ -54,14 +55,12 @@ class MovieDetailsScreen extends StatelessWidget {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
+                          spacing: 12.w,
                           children: [
-                            GenreWidget(name: 'Action'),
-                            SizedBox(width: 12.w),
-                            GenreWidget(name: 'Fantasy'),
-                            SizedBox(width: 12.w),
-                            GenreWidget(name: 'Adventure'),
-                            SizedBox(width: 12.w),
-                            GenreWidget(name: 'Horror'),
+                            ChipWidget(name: 'Action'),
+                            ChipWidget(name: 'Fantasy'),
+                            ChipWidget(name: 'Adventure'),
+                            ChipWidget(name: 'Horror'),
                           ],
                         ),
                       ),
@@ -176,106 +175,6 @@ class MovieDetailsScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class RatingProgressBar extends StatelessWidget {
-  const RatingProgressBar({
-    super.key,
-    required this.rating,
-    required this.progress,
-    this.maxSteps = 5,
-  });
-
-  final int rating;
-  final int progress;
-  final int maxSteps;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      spacing: 8.w,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          rating.toString(),
-          style: AppFonts.subtitle2Regular.copyWith(color: AppColors.white),
-        ),
-        SizedBox(
-          width: 168.w,
-          child: LinearProgressBar(
-            minHeight: 8.h,
-            maxSteps: maxSteps,
-            currentStep: progress,
-            borderRadius: BorderRadius.circular(12.r),
-            progressType: LinearProgressBar.progressTypeLinear,
-            backgroundColor: AppColors.secondary,
-            progressColor: AppColors.buttonColor,
-          ),
-        ),
-        Text(
-          '${(progress / maxSteps * 100).toInt()}%',
-          style: AppFonts.subtitle2Regular.copyWith(
-            color: AppColors.secondaryTextColor,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class CastMemberCard extends StatelessWidget {
-  const CastMemberCard({super.key, required this.name, required this.image});
-
-  final String name;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 160.w,
-          height: 213.h,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
-            color: AppColors.secondary,
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-        ),
-        SizedBox(height: 8.h),
-        Text(
-          name,
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium?.copyWith(color: AppColors.white),
-        ),
-      ],
-    );
-  }
-}
-
-class GenreWidget extends StatelessWidget {
-  const GenreWidget({super.key, this.name});
-
-  final name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.secondary,
-        borderRadius: BorderRadius.circular(12.r),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        child: Text(
-          name ?? '--',
-          style: AppFonts.subtitle2Regular.copyWith(color: AppColors.white),
         ),
       ),
     );

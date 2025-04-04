@@ -15,6 +15,9 @@ class AppColors {
   // Button colors
   static const Color buttonColor = Color(0xFF338AE8);
 
+  //Bottom Nav Bar Colors
+  static const Color bottomNavColor = Color(0xFF1A2633);
+
   // Utility colors
   static const Color error = Color(0xFFD32F2F);
   static const Color success = Color(0xFF388E3C);

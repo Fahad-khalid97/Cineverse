@@ -24,14 +24,13 @@ class DeviceInfoPlugin: NSObject, FlutterPlugin {
     }
 
     private func getDeviceInfo() -> [String: String] {
-
         let device = UIDevice.current
         let storage = getAvailableStorage()
 
         return [
-            "deviceModel": device.model,
+            "deviceModel": device.name,
             "osVersion": "iOS \(device.systemVersion)",
-            "availableStorage": "\(storage) MB",
+            "availableStorage": storage,
             "batteryLevel": "\(getBatteryLevel())%"
         ]
     }
@@ -41,15 +40,15 @@ class DeviceInfoPlugin: NSObject, FlutterPlugin {
         return Int(UIDevice.current.batteryLevel * 100)
     }
 
-    private func getAvailableStorage() -> Int {
+    private func getAvailableStorage() -> String {
         let fileManager = FileManager.default
 
         if let attributes = try? fileManager.attributesOfFileSystem(forPath: NSHomeDirectory()),
            let freeSize = attributes[.systemFreeSize] as? Int64 {
-            return Int(freeSize / (1024 * 1024)) // Convert to MB
+            let sizeInGB = Double(freeSize) / (1024 * 1024 * 1024)
+            return String(format: "%.2f GB", sizeInGB)
         }
-        return 0
-
+        return "0 GB"
     }
 
 }

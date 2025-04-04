@@ -5,7 +5,7 @@ import '../models/auth/auth_resp.dart';
 import '../models/auth/session_model.dart';
 import '../models/auth/session_delete_model.dart';
 
-@lazySingleton
+@injectable
 class AuthRepo {
   final AuthAPI _authAPI;
 

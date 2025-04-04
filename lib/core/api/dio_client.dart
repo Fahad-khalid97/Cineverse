@@ -8,14 +8,12 @@ import 'package:cineverse/core/api/interceptors/cache_interceptor.dart';
 class DioClient {
   final AuthInterceptor _authInterceptor;
   final CacheInterceptor _cacheInterceptor;
-  late final Dio _dio; // Add a field to store the Dio instance
+  late final Dio _dio;
 
-  // Add a getter to access the Dio instance
   Dio get dio => _dio;
 
-  DioClient(this._authInterceptor, this._cacheInterceptor);
-
-  void setDio() {
+  DioClient(this._authInterceptor, this._cacheInterceptor) {
+    // Initialize Dio immediately in the constructor
     _dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,

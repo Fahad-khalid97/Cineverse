@@ -36,7 +36,8 @@ class DeviceInfoPlugin(private val context: Context) : MethodChannel.MethodCallH
 
     private fun getAvailableStorage(): String {
         val stat = StatFs(Environment.getDataDirectory().path)
-        return "${stat.availableBlocksLong * stat.blockSizeLong / (1024 * 1024)} MB"
+        val sizeInGB = (stat.availableBlocksLong * stat.blockSizeLong).toDouble() / (1024 * 1024 * 1024)
+        return String.format("%.2f GB", sizeInGB)
     }
 
     private fun getBatteryLevel(): Int {

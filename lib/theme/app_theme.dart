@@ -6,7 +6,7 @@ class AppTheme {
   static ThemeData get theme {
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: AppColors.primary,
 
@@ -47,9 +47,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
-        labelStyle: AppFonts.body1.copyWith(
-          color: AppColors.secondaryTextColor,
-        ),
+        labelStyle: AppFonts.body1.copyWith(color: AppColors.white),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,
@@ -58,9 +56,17 @@ class AppTheme {
 
       // Bottom Navigation Bar Theme
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.inactive,
+        backgroundColor: AppColors.bottomNavColor,
+        selectedItemColor: AppColors.white,
+        unselectedItemColor: AppColors.secondaryTextColor,
         type: BottomNavigationBarType.fixed,
+        elevation: 0,
+        selectedLabelStyle: AppFonts.body2.copyWith(color: AppColors.white),
+        unselectedLabelStyle: AppFonts.caption.copyWith(
+          color: AppColors.secondaryTextColor,
+        ),
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
       ),
 
       // Text Theme

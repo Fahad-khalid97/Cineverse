@@ -8,9 +8,11 @@ import '../../models/genre/genre_resp_model.dart';
 
 part 'search_api.g.dart';
 
+@injectable
 @RestApi()
 abstract class SearchAPI {
-  factory SearchAPI(Dio dio, {String? baseUrl}) = _SearchAPI;
+  @factoryMethod
+  factory SearchAPI(Dio dio) = _SearchAPI;
 
   @GET(ApiConstants.searchMovie)
   Future<MovieListResponse> searchMovies({

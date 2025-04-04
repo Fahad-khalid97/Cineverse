@@ -12,9 +12,11 @@ import '../../models/movies/movie_videos_model.dart';
 
 part 'movies_api.g.dart';
 
+@injectable
 @RestApi()
 abstract class MoviesAPI {
-  factory MoviesAPI(Dio dio, {String? baseUrl}) = _MoviesAPI;
+  @factoryMethod
+  factory MoviesAPI(Dio dio) = _MoviesAPI;
 
   // Home Screen
   @GET(ApiConstants.moviePopular)
