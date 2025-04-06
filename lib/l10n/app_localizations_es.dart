@@ -15,6 +15,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get watchedMovies => 'Películas Vistas';
 
   @override
+  String get nowPlayingMovies => 'Películas en Cines';
+
+  @override
+  String get upcomingMovies => 'Próximos Estrenos';
+
+  @override
   String get signIn => 'Iniciar Sesión';
 
   @override

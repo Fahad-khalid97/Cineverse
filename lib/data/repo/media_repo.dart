@@ -32,6 +32,13 @@ class MediaRepo {
     return await _mediaAPI.getUpcomingMovies(language: language, page: page);
   }
 
+  Future<MovieListResponse> getNowPlayingMovies({
+    String? language,
+    int page = 1,
+  }) async {
+    return await _mediaAPI.getNowPlayingMovies(language: language, page: page);
+  }
+
   Future<MovieDetailsModel> getMovieDetails({
     required int movieId,
     String? language,

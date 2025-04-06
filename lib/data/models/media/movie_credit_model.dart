@@ -30,8 +30,6 @@ class CastModel {
   @JsonKey(name: 'original_name')
   final String originalName;
   final double popularity;
-  @JsonKey(name: 'cast_id')
-  final int castId;
   @JsonKey(name: 'credit_id')
   final String creditId;
   final bool adult;
@@ -46,7 +44,6 @@ class CastModel {
     required this.knownForDepartment,
     required this.originalName,
     required this.popularity,
-    required this.castId,
     required this.creditId,
     required this.adult,
   });
@@ -56,10 +53,10 @@ class CastModel {
 
   Map<String, dynamic> toJson() => _$CastModelToJson(this);
 
-  // Helper method to get the full poster URL
-  String getPosterUrl([String size = 'w500']) {
+  @JsonKey(ignore: true)
+  String get getPosterUrl {
     if (profilePath == null) return '';
-    return '${ApiConstants.imageBaseUrl}$size$profilePath';
+    return '${ApiConstants.imageBaseUrl}w500$profilePath';
   }
 }
 
@@ -99,4 +96,10 @@ class CrewModel {
       _$CrewModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$CrewModelToJson(this);
+
+  @JsonKey(ignore: true)
+  String get getPosterUrl {
+    if (profilePath == null) return '';
+    return '${ApiConstants.imageBaseUrl}w500$profilePath';
+  }
 }

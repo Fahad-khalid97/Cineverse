@@ -34,6 +34,7 @@ class ApiConstants {
   static const String movieTopRated = '/movie/top_rated';
   static const String movieUpcoming = '/movie/upcoming';
   static const String movieDetails = '/movie/{movie_id}';
+  static const String movieNowPlaying = '/movie/now_playing';
   static const String movieCredits = '/movie/{movie_id}/credits';
   static const String movieReviews = '/movie/{movie_id}/reviews';
 

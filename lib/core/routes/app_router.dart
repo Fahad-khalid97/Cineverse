@@ -5,7 +5,7 @@ import 'package:cineverse/features/auth/login/view/login_screen.dart';
 import 'package:cineverse/features/movie/home/bloc/home/home_cubit.dart';
 import 'package:cineverse/features/movie/home/view/home.dart';
 import 'package:cineverse/features/movie/my_list/view/my_list.dart';
-import 'package:cineverse/features/movie/movie_details/view/movie_details_screen.dart';
+import 'package:cineverse/features/movie/media_details/view/movie_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -37,7 +37,7 @@ class AppRouter {
         final args = settings.arguments as Map<String, dynamic>;
         final movie = args['movie'] as MovieModel;
         return MaterialPageRoute(
-          builder: (_) => MovieDetailsScreen(movie: movie),
+          builder: (_) => MediaDetailScreen(movie: movie),
         );
 
       default:

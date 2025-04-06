@@ -35,7 +35,7 @@ class MovieCardWidget extends StatelessWidget {
         ),
         SizedBox(height: 10.h),
         Text(
-          movie.title ?? '--',
+          movie.title ?? movie.name ?? '--',
           style: Theme.of(context).textTheme.titleLarge,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

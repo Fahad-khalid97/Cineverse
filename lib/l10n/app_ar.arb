@@ -1,6 +1,8 @@
 {
     "searchForMovie": "البحث عن فيلم",
     "watchedMovies": "أفلام مشاهدة",
+    "nowPlayingMovies": "أفلام معروضة",
+    "upcomingMovies": "أفلام مستقبلية",
     "signIn": "تسجيل الدخول",
     "signUp": "إنشاء حساب",
     "username": "اسم المستخدم",

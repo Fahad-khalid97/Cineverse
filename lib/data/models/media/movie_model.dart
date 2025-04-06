@@ -25,6 +25,7 @@ class MovieModel {
   final String? originalLanguage;
   @JsonKey(name: 'original_title')
   final String? originalTitle;
+  final String? name;
   final bool? video;
 
   MovieModel({
@@ -41,6 +42,7 @@ class MovieModel {
     this.adult,
     this.originalLanguage,
     this.originalTitle,
+    this.name,
     this.video,
   });
 

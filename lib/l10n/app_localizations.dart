@@ -111,6 +111,18 @@ abstract class AppLocalizations {
   /// **'Watched Movies'**
   String get watchedMovies;
 
+  /// Text for now playing movies section
+  ///
+  /// In en, this message translates to:
+  /// **'Now Playing Movies'**
+  String get nowPlayingMovies;
+
+  /// Text for upcoming movies section
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming Movies'**
+  String get upcomingMovies;
+
   /// Text for sign in button
   ///
   /// In en, this message translates to:

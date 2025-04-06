@@ -1,23 +1,21 @@
 import 'package:cineverse/core/routes/app_router.dart';
 import 'package:cineverse/di/di.dart';
 import 'package:cineverse/features/account/profile_setting/view/profile_screen.dart';
+import 'package:cineverse/features/movie/my_list/bloc/my_list/my_list_cubit.dart';
 import 'package:cineverse/theme/app_theme.dart';
 import 'package:cineverse/theme/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:cineverse/features/movie/home/view/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cineverse/features/movie/home/bloc/home/home_cubit.dart';
 import 'package:cineverse/features/auth/login/bloc/login_cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:cineverse/l10n/app_localizations.dart';
-import 'package:cineverse/features/movie/movie_details/view/movie_details_screen.dart';
-import 'package:cineverse/features/auth/login/view/login_screen.dart';
-import 'package:cineverse/features/movie/my_list/view/my_list.dart';
+
 import 'package:cineverse/widget/smart_widget/bottom_nav_bar/bottom_nav_bar.dart';
-import 'package:cineverse/features/movie/movie_details/bloc/movie_detail/movie_detail_cubit.dart';
+import 'package:cineverse/features/movie/media_details/bloc/media_detail/media_detail_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +39,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(create: (context) => getIt<LoginCubit>()),
-        BlocProvider(create: (context) => getIt<MovieDetailCubit>()),
+        BlocProvider(create: (context) => MyListCubit()),
+        BlocProvider(create: (context) => MediaDetailCubit()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

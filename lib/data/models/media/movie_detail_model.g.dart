@@ -48,6 +48,8 @@ MovieDetailsModel _$MovieDetailsModelFromJson(
           : CollectionModel.fromJson(
             json['belongs_to_collection'] as Map<String, dynamic>,
           ),
+  firstAirDate: json['first_air_date'] as String?,
+  name: json['name'] as String?,
 );
 
 Map<String, dynamic> _$MovieDetailsModelToJson(MovieDetailsModel instance) =>
@@ -74,6 +76,8 @@ Map<String, dynamic> _$MovieDetailsModelToJson(MovieDetailsModel instance) =>
       'budget': instance.budget,
       'revenue': instance.revenue,
       'imdb_id': instance.imdbId,
+      'first_air_date': instance.firstAirDate,
+      'name': instance.name,
       'belongs_to_collection': instance.belongsToCollection,
     };
 

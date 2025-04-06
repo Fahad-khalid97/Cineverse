@@ -11,27 +11,34 @@ import '../../../../l10n/app_localizations.dart';
 import 'package:cineverse/data/models/media/movie_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../bloc/movie_detail/movie_detail_cubit.dart';
-import '../bloc/movie_detail/movie_detail_state.dart';
+import '../bloc/media_detail/media_detail_cubit.dart';
+import '../bloc/media_detail/media_detail_state.dart';
 import '../../../../widget/dumb_widget/error_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:cineverse/data/models/media/movie_review_model.dart';
-import 'dart:developer';
 
-class MovieDetailsScreen extends StatefulWidget {
-  const MovieDetailsScreen({super.key, this.movie});
+class MediaDetailScreen extends StatefulWidget {
+  const MediaDetailScreen({super.key, this.movie, this.type = 'movie'});
 
   final MovieModel? movie;
-
+  final String? type;
   @override
-  State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
+  State<MediaDetailScreen> createState() => _MediaDetailScreenState();
 }
 
-class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
+class _MediaDetailScreenState extends State<MediaDetailScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<MovieDetailCubit>().loadMovieDetail(widget.movie?.id ?? 0);
+    loadData();
+  }
+
+  loadData() {
+    if (widget.type == 'movie') {
+      context.read<MediaDetailCubit>().loadMovieDetail(widget.movie?.id ?? 0);
+    } else {
+      context.read<MediaDetailCubit>().loadTvDetail(widget.movie?.id ?? 0);
+    }
   }
 
   @override
@@ -44,14 +51,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     double minRating,
     double maxRating,
   ) {
-    authors.map((e) => {log(e.rating.toString())});
     return authors.isEmpty
         ? 0
         : authors
             .where(
               (e) =>
-                  (e.rating ?? 0.0 / 2) > minRating &&
-                  (e.rating ?? 0.0 / 2) <= maxRating,
+                  ((e.rating ?? 0.0) / 2) > minRating &&
+                  ((e.rating ?? 0.0) / 2) <= maxRating,
             )
             .length;
   }
@@ -59,7 +65,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.movie?.title ?? '--')),
+      appBar: AppBar(
+        title: Text(widget.movie?.title ?? widget.movie?.name ?? '--'),
+      ),
       floatingActionButton: SizedBox(
         width: 340.w,
         height: 48.h,
@@ -76,19 +84,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           icon: const Icon(Icons.bookmark_add_outlined, color: Colors.white),
         ),
       ),
-      body: BlocBuilder<MovieDetailCubit, MovieDetailState>(
+      body: BlocBuilder<MediaDetailCubit, MediaDetailState>(
         builder: (context, state) {
-          if (state is MovieDetailError) {
+          if (state is MediaDetailError) {
             return CustomErrorWidget(
               error: state.error,
               onPressed: () {
-                context.read<MovieDetailCubit>().loadMovieDetail(
-                  widget.movie?.id ?? 0,
-                );
+                loadData();
               },
             );
           }
-          if (state is MovieDetailLoaded || state is MovieDetailLoading) {
+          if (state is MediaDetailLoaded || state is MediaDetailLoading) {
             return SafeArea(
               child: Container(
                 constraints: BoxConstraints(
@@ -97,7 +103,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                 ),
                 child: SingleChildScrollView(
                   child: Skeletonizer(
-                    enabled: state is MovieDetailLoading,
+                    enabled: state is MediaDetailLoading,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,13 +131,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             children: [
                               SizedBox(height: 20.h),
                               Text(
-                                state.movie.title ?? '--',
+                                state.movie.title ?? state.movie.name ?? '--',
                                 style: Theme.of(context).textTheme.displayLarge,
                               ),
 
                               SizedBox(height: 8.h),
                               Text(
-                                '${widget.movie?.releaseDate!.split('-')[0]} · ${state.movie.formattedRuntime} · R',
+                                '${state.movie.releaseDateFormatted} · ${state.movie.formattedRuntime} · R',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
 
@@ -255,15 +261,20 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   spacing: 12.h,
-                                  children:
-                                      state.cast
-                                          .map(
-                                            (e) => CastMemberCard(
-                                              name: e.name,
-                                              image: e.getPosterUrl(),
-                                            ),
-                                          )
-                                          .toList(),
+                                  children: [
+                                    ...state.cast.map(
+                                      (cast) => CastMemberCard(
+                                        name: cast.name,
+                                        image: cast.getPosterUrl,
+                                      ),
+                                    ),
+                                    ...state.crew.map(
+                                      (crew) => CastMemberCard(
+                                        name: crew.name,
+                                        image: crew.getPosterUrl,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

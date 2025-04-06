@@ -7,6 +7,14 @@
     "@watchedMovies": {
       "description": "Text for watched movies section"
     },
+    "nowPlayingMovies": "Now Playing Movies",
+    "@nowPlayingMovies": {
+      "description": "Text for now playing movies section"
+    },
+    "upcomingMovies": "Upcoming Movies",
+    "@upcomingMovies": {
+      "description": "Text for upcoming movies section"
+    },
     "signIn": "Sign In",
     "@signIn": {
       "description": "Text for sign in button"

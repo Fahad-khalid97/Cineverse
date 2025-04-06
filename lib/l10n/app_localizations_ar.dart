@@ -15,6 +15,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get watchedMovies => 'أفلام مشاهدة';
 
   @override
+  String get nowPlayingMovies => 'أفلام معروضة';
+
+  @override
+  String get upcomingMovies => 'أفلام مستقبلية';
+
+  @override
   String get signIn => 'تسجيل الدخول';
 
   @override

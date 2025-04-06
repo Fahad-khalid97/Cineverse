@@ -16,8 +16,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const HomeScreen(),
     const MyListScreen(),
+    const HomeScreen(key: Key('tv'), type: 'tv'),
+    const HomeScreen(key: Key('movie'), type: 'movie'),
     const ProfileScreen(),
   ];
 
@@ -42,9 +43,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_outline),
-            activeIcon: Icon(Icons.bookmark),
-            label: 'My List',
+            icon: Icon(Icons.tv_outlined),
+            activeIcon: Icon(Icons.tv),
+            label: 'TV Shows',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.movie_outlined),
+            activeIcon: Icon(Icons.movie),
+            label: 'Movies',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),

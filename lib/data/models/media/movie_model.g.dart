@@ -23,6 +23,7 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) => MovieModel(
   adult: json['adult'] as bool?,
   originalLanguage: json['original_language'] as String?,
   originalTitle: json['original_title'] as String?,
+  name: json['name'] as String?,
   video: json['video'] as bool?,
 );
 
@@ -41,5 +42,6 @@ Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
       'adult': instance.adult,
       'original_language': instance.originalLanguage,
       'original_title': instance.originalTitle,
+      'name': instance.name,
       'video': instance.video,
     };

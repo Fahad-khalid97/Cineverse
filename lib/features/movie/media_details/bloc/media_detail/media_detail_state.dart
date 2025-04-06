@@ -5,7 +5,7 @@ import 'package:cineverse/data/models/media/movie_review_model.dart';
 import 'package:cineverse/data/models/media/movie_credit_model.dart';
 
 @immutable
-sealed class MovieDetailState extends Equatable {
+sealed class MediaDetailState extends Equatable {
   final MovieDetailsModel movie;
   final List<ReviewModel> reviews;
   final double? rating;
@@ -13,7 +13,7 @@ sealed class MovieDetailState extends Equatable {
   final List<CrewModel> crew;
   final List<AuthorDetailsModel> authorDetails;
 
-  const MovieDetailState({
+  const MediaDetailState({
     required this.movie,
     required this.reviews,
     required this.authorDetails,
@@ -33,8 +33,8 @@ sealed class MovieDetailState extends Equatable {
   ];
 }
 
-final class MovieDetailInitial extends MovieDetailState {
-  const MovieDetailInitial({
+final class MediaDetailInitial extends MediaDetailState {
+  const MediaDetailInitial({
     required super.movie,
     required super.reviews,
     required super.authorDetails,
@@ -54,8 +54,8 @@ final class MovieDetailInitial extends MovieDetailState {
   ];
 }
 
-final class MovieDetailLoading extends MovieDetailState {
-  const MovieDetailLoading({
+final class MediaDetailLoading extends MediaDetailState {
+  const MediaDetailLoading({
     required super.movie,
     required super.reviews,
     required super.authorDetails,
@@ -75,8 +75,8 @@ final class MovieDetailLoading extends MovieDetailState {
   ];
 }
 
-final class MovieDetailLoaded extends MovieDetailState {
-  const MovieDetailLoaded({
+final class MediaDetailLoaded extends MediaDetailState {
+  const MediaDetailLoaded({
     required super.movie,
     required super.reviews,
     required super.authorDetails,
@@ -96,9 +96,9 @@ final class MovieDetailLoaded extends MovieDetailState {
   ];
 }
 
-final class MovieDetailError extends MovieDetailState {
+final class MediaDetailError extends MediaDetailState {
   final String error;
-  const MovieDetailError({
+  const MediaDetailError({
     required super.movie,
     required super.reviews,
     required super.authorDetails,

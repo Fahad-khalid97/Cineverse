@@ -25,7 +25,7 @@ class CastMemberCard extends StatelessWidget {
                       ? const AssetImage(AppImage.cast)
                       : CachedNetworkImageProvider(
                         image,
-                        cacheKey: image + 'cast',
+                        cacheKey: '${image}cast',
                       ),
               fit: BoxFit.cover,
             ),

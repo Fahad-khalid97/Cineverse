@@ -35,6 +35,12 @@ abstract class MediaAPI {
     @Query("page") int page = 1,
   });
 
+  @GET(ApiConstants.movieNowPlaying)
+  Future<MovieListResponse> getNowPlayingMovies({
+    @Query("language") String? language,
+    @Query("page") int page = 1,
+  });
+
   @GET(ApiConstants.movieDetails)
   Future<MovieDetailsModel> getMovieDetails({
     @Path("movie_id") required int movieId,

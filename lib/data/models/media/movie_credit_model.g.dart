@@ -36,7 +36,6 @@ CastModel _$CastModelFromJson(Map<String, dynamic> json) => CastModel(
   knownForDepartment: json['known_for_department'] as String,
   originalName: json['original_name'] as String,
   popularity: (json['popularity'] as num).toDouble(),
-  castId: (json['cast_id'] as num).toInt(),
   creditId: json['credit_id'] as String,
   adult: json['adult'] as bool,
 );
@@ -51,7 +50,6 @@ Map<String, dynamic> _$CastModelToJson(CastModel instance) => <String, dynamic>{
   'known_for_department': instance.knownForDepartment,
   'original_name': instance.originalName,
   'popularity': instance.popularity,
-  'cast_id': instance.castId,
   'credit_id': instance.creditId,
   'adult': instance.adult,
 };

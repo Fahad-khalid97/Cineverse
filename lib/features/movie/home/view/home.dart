@@ -8,14 +8,15 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../bloc/home/home_cubit.dart';
 import '../bloc/home/home_state.dart';
 import 'package:cineverse/l10n/app_localizations.dart';
-import 'package:cineverse/features/movie/movie_details/view/movie_details_screen.dart';
+import 'package:cineverse/features/movie/media_details/view/movie_details_screen.dart';
 import '../widget/dumb_widget/movie_card_widget.dart';
 import '../../../../widget/dumb_widget/error_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:cineverse/data/models/genre/genre_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final String type;
+  const HomeScreen({super.key, this.type = 'movie'});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -28,15 +29,40 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().loadMovies();
-    context.read<HomeCubit>().loadGenres();
+    loadData();
+    onScrollLoadData();
+  }
+
+  loadData() {
+    if (widget.type == 'movie') {
+      context.read<HomeCubit>().loadMovies(reset: true);
+      context.read<HomeCubit>().loadGenres();
+    } else {
+      context.read<HomeCubit>().loadTvShows(reset: true);
+      context.read<HomeCubit>().loadTvGenres();
+    }
+  }
+
+  onScrollLoadData() {
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         if (searchController.text.isEmpty) {
-          context.read<HomeCubit>().loadMovies();
+          if (widget.type == 'movie') {
+            context.read<HomeCubit>().loadMovies();
+          } else {
+            context.read<HomeCubit>().loadTvShows();
+          }
         } else {
-          context.read<HomeCubit>().searchMovies(searchController.text.trim());
+          if (widget.type == 'movie') {
+            context.read<HomeCubit>().searchMovies(
+              searchController.text.trim(),
+            );
+          } else {
+            context.read<HomeCubit>().searchTvShows(
+              searchController.text.trim(),
+            );
+          }
         }
       }
     });
@@ -48,9 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
       const Duration(milliseconds: 500),
       () {
         if (value.isEmpty) {
-          context.read<HomeCubit>().loadMovies(reset: true);
+          if (widget.type == 'movie') {
+            context.read<HomeCubit>().loadMovies(reset: true);
+          } else {
+            context.read<HomeCubit>().loadTvShows(reset: true);
+          }
         } else {
-          context.read<HomeCubit>().searchMovies(value.trim(), reset: true);
+          if (widget.type == 'movie') {
+            context.read<HomeCubit>().searchMovies(value.trim(), reset: true);
+          } else {
+            context.read<HomeCubit>().searchTvShows(value.trim(), reset: true);
+          }
         }
       },
     );
@@ -66,7 +100,14 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedGenres.add(genre);
       }
     });
-    context.read<HomeCubit>().loadMovies(reset: true, genres: selectedGenres);
+    if (widget.type == 'movie') {
+      context.read<HomeCubit>().loadMovies(reset: true, genres: selectedGenres);
+    } else {
+      context.read<HomeCubit>().loadTvShows(
+        reset: true,
+        genres: selectedGenres,
+      );
+    }
   }
 
   @override
@@ -109,31 +150,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 SizedBox(height: 12.h),
-                if (state is HomeLoadedState || state is HomeLoadingState)
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Skeletonizer(
-                      enabled:
-                          state is HomeLoadingState && state.genres.isEmpty,
-                      child: Row(
-                        children: [
-                          for (var genre in state.genres)
-                            Padding(
-                              padding: EdgeInsets.only(right: 12.w),
-                              child: ChipWidget(
-                                name: genre.name,
-                                isSelected: selectedGenres.contains(genre),
-                                onPressed: () => toggleGenreSelection(genre),
-                              ),
+
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Skeletonizer(
+                    enabled: state is HomeLoadingState && state.genres.isEmpty,
+                    child: Row(
+                      children: [
+                        for (var genre in state.genres)
+                          Padding(
+                            padding: EdgeInsets.only(right: 12.w),
+                            child: ChipWidget(
+                              name: genre.name,
+                              isSelected: selectedGenres.contains(genre),
+                              onPressed: () => toggleGenreSelection(genre),
                             ),
-                        ],
-                      ),
+                          ),
+                      ],
                     ),
                   ),
+                ),
                 SizedBox(height: 20.h),
                 Expanded(
                   child:
-                      state is HomeErrorState
+                      state is HomeErrorState &&
+                              state.movies.isEmpty &&
+                              state.genres.isEmpty
                           ? CustomErrorWidget(
                             error: state.error,
                             onPressed: () {
@@ -161,7 +203,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder:
-                                            (context) => MovieDetailsScreen(
+                                            (context) => MediaDetailScreen(
+                                              type: widget.type,
                                               movie: movie,
                                             ),
                                       ),

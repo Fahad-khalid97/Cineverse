@@ -38,6 +38,9 @@ class MovieDetailsModel {
   final int? revenue;
   @JsonKey(name: 'imdb_id')
   final String? imdbId;
+  @JsonKey(name: 'first_air_date')
+  final String? firstAirDate;
+  final String? name;
   @JsonKey(name: 'belongs_to_collection')
   final CollectionModel? belongsToCollection;
 
@@ -65,6 +68,8 @@ class MovieDetailsModel {
     this.revenue,
     this.imdbId,
     this.belongsToCollection,
+    this.firstAirDate,
+    this.name,
   });
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) =>
@@ -99,6 +104,14 @@ class MovieDetailsModel {
     } else {
       return voteCount.toString();
     }
+  }
+
+  @JsonKey(ignore: true)
+  String get releaseDateFormatted {
+    if (releaseDate != null || firstAirDate != null) {
+      return (releaseDate ?? firstAirDate)!.split('-')[0];
+    }
+    return '';
   }
 }
 

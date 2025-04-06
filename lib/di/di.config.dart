@@ -29,8 +29,8 @@ import 'package:cineverse/data/repo/search_repo.dart' as _i518;
 import 'package:cineverse/features/auth/login/bloc/login_cubit.dart' as _i487;
 import 'package:cineverse/features/movie/home/bloc/home/home_cubit.dart'
     as _i1051;
-import 'package:cineverse/features/movie/movie_details/bloc/movie_detail/movie_detail_cubit.dart'
-    as _i461;
+import 'package:cineverse/features/movie/media_details/bloc/media_detail/media_detail_cubit.dart'
+    as _i377;
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -42,8 +42,8 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i461.MovieDetailCubit>(() => _i461.MovieDetailCubit());
     gh.factory<_i1051.HomeCubit>(() => _i1051.HomeCubit());
+    gh.factory<_i377.MediaDetailCubit>(() => _i377.MediaDetailCubit());
     gh.lazySingleton<_i277.DeviceInfoService>(() => _i277.DeviceInfoService());
     gh.lazySingleton<_i152.AuthInterceptor>(() => _i152.AuthInterceptor());
     gh.lazySingleton<_i113.CacheInterceptor>(() => _i113.CacheInterceptor());

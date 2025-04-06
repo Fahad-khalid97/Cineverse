@@ -49,4 +49,38 @@ class SearchRepo {
   Future<GenreListResponse> getMovieGenres({String? language}) async {
     return await _searchAPI.getMovieGenres(language: language);
   }
+
+  Future<MovieListResponse> discoverTvShows({
+    String? language,
+    String sortBy = "popularity.desc",
+    bool? includeAdult,
+    bool? includeVideo,
+    String? withGenres,
+    int page = 1,
+  }) async {
+    return await _searchAPI.discoverTv(
+      language: language,
+      sortBy: sortBy,
+      includeAdult: includeAdult,
+      includeVideo: includeVideo,
+      page: page,
+      withGenres: withGenres,
+    );
+  }
+
+  Future<GenreListResponse> getTvGenres({String? language}) async {
+    return await _searchAPI.getTvGenres(language: language);
+  }
+
+  Future<MovieListResponse> searchTvShows({
+    String? language,
+    required String query,
+    int page = 1,
+  }) async {
+    return await _searchAPI.searchTv(
+      language: language,
+      query: query,
+      page: page,
+    );
+  }
 }
