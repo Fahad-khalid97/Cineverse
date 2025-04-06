@@ -19,10 +19,10 @@ class _SearchAPI implements SearchAPI {
 
   @override
   Future<MovieListResponse> searchMovies({
-    String language = "en-US",
+    String? language,
     required String query,
     int page = 1,
-    bool includeAdult = false,
+    bool? includeAdult,
     int? year,
   }) async {
     final _extra = <String, dynamic>{};
@@ -59,10 +59,10 @@ class _SearchAPI implements SearchAPI {
 
   @override
   Future<MovieListResponse> discoverMovies({
-    String language = "en-US",
-    String sortBy = "popularity.desc",
-    bool includeAdult = false,
-    bool includeVideo = false,
+    String? language,
+    String? sortBy = "popularity.desc",
+    bool? includeAdult,
+    bool? includeVideo,
     int page = 1,
     String? withGenres,
     int? year,
@@ -102,9 +102,10 @@ class _SearchAPI implements SearchAPI {
   }
 
   @override
-  Future<GenreListResponse> getMovieGenres({String language = "en-US"}) async {
+  Future<GenreListResponse> getMovieGenres({String? language}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'language': language};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<GenreListResponse>(
@@ -112,6 +113,116 @@ class _SearchAPI implements SearchAPI {
           .compose(
             _dio.options,
             '/genre/movie/list',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GenreListResponse _value;
+    try {
+      _value = GenreListResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<MovieListResponse> searchTv({
+    String? language,
+    required String query,
+    int page = 1,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'language': language,
+      r'query': query,
+      r'page': page,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<MovieListResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/search/tv',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MovieListResponse _value;
+    try {
+      _value = MovieListResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<MovieListResponse> discoverTv({
+    String? language,
+    String? sortBy = "popularity.desc",
+    bool? includeAdult,
+    bool? includeVideo,
+    int page = 1,
+    String? withGenres,
+    String? withNetworks,
+    int? firstAirDateYear,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'language': language,
+      r'sort_by': sortBy,
+      r'include_adult': includeAdult,
+      r'include_video': includeVideo,
+      r'page': page,
+      r'with_genres': withGenres,
+      r'with_networks': withNetworks,
+      r'first_air_date_year': firstAirDateYear,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<MovieListResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/discover/tv',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MovieListResponse _value;
+    try {
+      _value = MovieListResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GenreListResponse> getTvGenres({String? language}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'language': language};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<GenreListResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/genre/tv/list',
             queryParameters: queryParameters,
             data: _data,
           )

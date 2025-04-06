@@ -25,7 +25,15 @@ class DioClient {
           'Accept': 'application/json',
           'Authorization': 'Bearer ${ApiConstants.bearerToken}',
         },
-        queryParameters: {'api_key': ApiConstants.apiKey},
+      ),
+    );
+
+    _dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        error: true,
+        requestBody: true,
+        responseBody: true,
       ),
     );
 

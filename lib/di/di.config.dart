@@ -19,14 +19,18 @@ import 'package:cineverse/data/datasource/remote/account_api.dart' as _i926;
 import 'package:cineverse/data/datasource/remote/auth_api.dart' as _i1072;
 import 'package:cineverse/data/datasource/remote/configuration_api.dart'
     as _i494;
-import 'package:cineverse/data/datasource/remote/movies_api.dart' as _i968;
+import 'package:cineverse/data/datasource/remote/media_api.dart' as _i654;
 import 'package:cineverse/data/datasource/remote/search_api.dart' as _i856;
 import 'package:cineverse/data/repo/account_repo.dart' as _i944;
 import 'package:cineverse/data/repo/auth_repo.dart' as _i699;
 import 'package:cineverse/data/repo/configuration_repo.dart' as _i1049;
-import 'package:cineverse/data/repo/movie_repo.dart' as _i769;
+import 'package:cineverse/data/repo/media_repo.dart' as _i262;
 import 'package:cineverse/data/repo/search_repo.dart' as _i518;
 import 'package:cineverse/features/auth/login/bloc/login_cubit.dart' as _i487;
+import 'package:cineverse/features/movie/home/bloc/home/home_cubit.dart'
+    as _i1051;
+import 'package:cineverse/features/movie/movie_details/bloc/movie_detail/movie_detail_cubit.dart'
+    as _i461;
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -38,12 +42,14 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i461.MovieDetailCubit>(() => _i461.MovieDetailCubit());
+    gh.factory<_i1051.HomeCubit>(() => _i1051.HomeCubit());
     gh.lazySingleton<_i277.DeviceInfoService>(() => _i277.DeviceInfoService());
     gh.lazySingleton<_i152.AuthInterceptor>(() => _i152.AuthInterceptor());
     gh.lazySingleton<_i113.CacheInterceptor>(() => _i113.CacheInterceptor());
     gh.lazySingleton<_i162.AppRouter>(() => _i162.AppRouter());
     gh.factory<_i1072.AuthAPI>(() => _i1072.AuthAPI(gh<_i361.Dio>()));
-    gh.factory<_i968.MoviesAPI>(() => _i968.MoviesAPI(gh<_i361.Dio>()));
+    gh.factory<_i654.MediaAPI>(() => _i654.MediaAPI(gh<_i361.Dio>()));
     gh.factory<_i926.AccountAPI>(() => _i926.AccountAPI(gh<_i361.Dio>()));
     gh.factory<_i494.ConfigurationAPI>(
       () => _i494.ConfigurationAPI(gh<_i361.Dio>()),
@@ -63,8 +69,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i113.CacheInterceptor>(),
       ),
     );
-    gh.lazySingleton<_i769.MoviesRepo>(
-      () => _i769.MoviesRepo(gh<_i968.MoviesAPI>()),
+    gh.lazySingleton<_i262.MediaRepo>(
+      () => _i262.MediaRepo(gh<_i654.MediaAPI>()),
     );
     gh.lazySingleton<_i1049.ConfigurationRepo>(
       () => _i1049.ConfigurationRepo(gh<_i494.ConfigurationAPI>()),

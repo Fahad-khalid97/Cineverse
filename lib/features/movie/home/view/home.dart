@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cineverse/theme/app_fonts.dart';
 import 'package:cineverse/theme/app_colors.dart';
-import 'package:cineverse/theme/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +7,12 @@ import '../../../../widget/dumb_widget/chip.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../bloc/home/home_cubit.dart';
 import '../bloc/home/home_state.dart';
-import 'dart:developer';
+import 'package:cineverse/l10n/app_localizations.dart';
+import 'package:cineverse/features/movie/movie_details/view/movie_details_screen.dart';
+import '../widget/dumb_widget/movie_card_widget.dart';
+import '../../../../widget/dumb_widget/error_widget.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:cineverse/data/models/genre/genre_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,23 +23,63 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final searchController = TextEditingController();
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     context.read<HomeCubit>().loadMovies();
+    context.read<HomeCubit>().loadGenres();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        if (searchController.text.isEmpty) {
+          context.read<HomeCubit>().loadMovies();
+        } else {
+          context.read<HomeCubit>().searchMovies(searchController.text.trim());
+        }
+      }
+    });
+  }
+
+  onChangeSearch(String value) {
+    EasyDebounce.debounce(
+      'search_debounce',
+      const Duration(milliseconds: 500),
+      () {
+        if (value.isEmpty) {
+          context.read<HomeCubit>().loadMovies(reset: true);
+        } else {
+          context.read<HomeCubit>().searchMovies(value.trim(), reset: true);
+        }
+      },
+    );
+  }
+
+  List<GenreModel> selectedGenres = [];
+
+  void toggleGenreSelection(GenreModel genre) {
+    setState(() {
+      if (selectedGenres.contains(genre)) {
+        selectedGenres.remove(genre);
+      } else {
+        selectedGenres.add(genre);
+      }
+    });
+    context.read<HomeCubit>().loadMovies(reset: true, genres: selectedGenres);
   }
 
   @override
   void dispose() {
     searchController.dispose();
+    EasyDebounce.cancel('search_debounce');
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.search)),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return Padding(
@@ -47,10 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 20.h),
                 TextFormField(
                   controller: searchController,
+                  onChanged: onChangeSearch,
                   style: AppFonts.body1.copyWith(color: AppColors.white),
                   decoration: InputDecoration(
-                    labelText: 'Search',
-                    hintText: 'Search for a movie',
+                    labelText: AppLocalizations.of(context)!.search,
+                    hintText: AppLocalizations.of(context)!.searchForMovie,
                     suffixIcon: Icon(
                       Icons.search,
                       color: AppColors.secondaryTextColor,
@@ -61,112 +105,72 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 20.h),
                 Text(
-                  'Filters',
-                  style: AppFonts.heading6.copyWith(color: AppColors.white),
+                  AppLocalizations.of(context)!.filters,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 SizedBox(height: 12.h),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Skeletonizer(
-                    enabled: state is HomeLoadingState,
-                    child: Row(
-                      children: [
-                        for (var genre in state.genres)
-                          Padding(
-                            padding: EdgeInsets.only(right: 12.w),
-                            child: ChipWidget(name: genre.name),
-                          ),
-                      ],
+                if (state is HomeLoadedState || state is HomeLoadingState)
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Skeletonizer(
+                      enabled:
+                          state is HomeLoadingState && state.genres.isEmpty,
+                      child: Row(
+                        children: [
+                          for (var genre in state.genres)
+                            Padding(
+                              padding: EdgeInsets.only(right: 12.w),
+                              child: ChipWidget(
+                                name: genre.name,
+                                isSelected: selectedGenres.contains(genre),
+                                onPressed: () => toggleGenreSelection(genre),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
                 SizedBox(height: 20.h),
                 Expanded(
                   child:
                       state is HomeErrorState
-                          ? Center(
-                            child: Column(
-                              spacing: 16.h,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Error',
-                                  style: AppFonts.heading6.copyWith(
-                                    color: AppColors.white,
-                                  ),
-                                ),
-
-                                Text(
-                                  state.error.split('Error:')[1].toString(),
-                                  maxLines: 3,
-                                  style: AppFonts.body2.copyWith(
-                                    color: AppColors.secondaryTextColor,
-                                  ),
-                                ),
-
-                                ElevatedButton(
-                                  onPressed: () {
-                                    context.read<HomeCubit>().loadMovies();
-                                  },
-                                  child: const Text('Retry'),
-                                ),
-                              ],
-                            ),
-                          )
-                          : GridView.builder(
-                            padding: EdgeInsets.symmetric(vertical: 8.h),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1.3,
-                                  mainAxisSpacing: 16.h,
-                                  crossAxisSpacing: 16.w,
-                                ),
-                            itemCount: state.movies.length,
-                            itemBuilder: (context, index) {
-                              log((state is HomeLoadingState).toString());
-                              final movie = state.movies[index];
-                              return Skeletonizer(
-                                enabled: state is HomeLoadingState,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 95.h,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image:
-                                              movie.posterPath != null
-                                                  ? CachedNetworkImageProvider(
-                                                    movie.getPosterUrl(),
-                                                    cacheKey:
-                                                        movie.id.toString(),
-                                                  )
-                                                  : AssetImage(AppImage.movie)
-                                                      as ImageProvider,
-                                        ),
-                                        color: AppColors.secondary,
-                                        borderRadius: BorderRadius.circular(
-                                          12.r,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 10.h),
-                                    Text(
-                                      movie.title,
-                                      style:
-                                          Theme.of(
-                                            context,
-                                          ).textTheme.titleLarge,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
-                              );
+                          ? CustomErrorWidget(
+                            error: state.error,
+                            onPressed: () {
+                              context.read<HomeCubit>().loadMovies();
                             },
+                          )
+                          : Skeletonizer(
+                            enabled: state is HomeLoadingState,
+                            child: GridView.builder(
+                              controller: scrollController,
+                              padding: EdgeInsets.symmetric(vertical: 8.h),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 1.3,
+                                    mainAxisSpacing: 16.h,
+                                    crossAxisSpacing: 16.w,
+                                  ),
+                              itemCount: state.movies.length,
+                              itemBuilder: (context, index) {
+                                final movie = state.movies[index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => MovieDetailsScreen(
+                                              movie: movie,
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                  child: MovieCardWidget(movie: movie),
+                                );
+                              },
+                            ),
                           ),
                 ),
               ],

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../widget/dumb_widget/chip.dart';
-import '../../../../theme/app_fonts.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_images.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class MyListScreen extends StatelessWidget {
   const MyListScreen({super.key});
@@ -12,7 +12,7 @@ class MyListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Movies')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.movies)),
       body: Center(
         child: Padding(
           padding: EdgeInsets.only(left: 12.w),
@@ -37,9 +37,8 @@ class MyListScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                'Popular Movies',
-
-                style: AppFonts.heading6.copyWith(color: AppColors.white),
+                AppLocalizations.of(context)!.popularMovies,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               Expanded(
                 child: Skeletonizer(
@@ -81,8 +80,8 @@ class MyListScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                'Top Rated',
-                style: AppFonts.heading6.copyWith(color: AppColors.white),
+                AppLocalizations.of(context)!.topRatedMovies,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
 
               Expanded(

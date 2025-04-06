@@ -1,0 +1,142 @@
+{
+    "searchForMovie": "Search for a movie",
+    "@searchForMovie": {
+      "description": "Placeholder text for movie search input"
+    },
+    "watchedMovies": "Watched Movies",
+    "@watchedMovies": {
+      "description": "Text for watched movies section"
+    },
+    "signIn": "Sign In",
+    "@signIn": {
+      "description": "Text for sign in button"
+    },
+    "signUp": "Sign Up",
+    "@signUp": {
+      "description": "Text for sign up button"
+    },
+    "username": "Username",
+    "@username": {
+      "description": "Label for username field"
+    },
+    "password": "Password",
+    "@password": {
+      "description": "Label for password field"
+    },
+    "forgotPassword": "Forgot Password?",
+    "@forgotPassword": {
+      "description": "Link text for password recovery"
+    },
+    "login": "Login",
+    "@login": {
+      "description": "Text for login button"
+    },
+    "newUser": "New User?",
+    "@newUser": {
+      "description": "Question asking if user is new"
+    },
+    "termsAgreement": "By continuing, you agree to the Terms of Use. Read our Privacy Policy.",
+    "@termsAgreement": {
+      "description": "Terms and privacy policy agreement text"
+    },
+    "search": "Search",
+    "@search": {
+      "description": "Text for search function"
+    },
+    "filters": "Filters",
+    "@filters": {
+      "description": "Text for filters button"
+    },
+    "home": "Home",
+    "@home": {
+      "description": "Text for home navigation"
+    },
+    "tvShows": "TV Shows",
+    "@tvShows": {
+      "description": "Text for TV shows category"
+    },
+    "movies": "Movies",
+    "@movies": {
+      "description": "Text for movies category"
+    },
+    "myList": "My List",
+    "@myList": {
+      "description": "Text for personal list of saved content"
+    },
+    "popularMovies": "Popular Movies",
+    "@popularMovies": {
+      "description": "Text for popular movies section"
+    },
+    "popularTVShows": "Popular TV Shows",
+    "@popularTVShows": {
+      "description": "Text for popular TV shows section"
+    },
+    "topRatedMovies": "Top Rated Movies",
+    "@topRatedMovies": {
+      "description": "Text for top rated movies section"
+    },
+    "topRatedTVShows": "Top Rated TV Shows",
+    "@topRatedTVShows": {
+      "description": "Text for top rated TV shows section"
+    },
+    "reviews": "reviews",
+    "@reviews": {
+      "description": "Text for reviews section"
+    },
+    "cast": "Cast",
+    "@cast": {
+      "description": "Text for cast section"
+    },
+    "crew": "Crew",
+    "@crew": {
+      "description": "Text for crew section"
+    },
+    "castAndCrew": "Cast & Crew",
+    "@castAndCrew": {
+      "description": "Text for combined cast and crew section"
+    },
+    "addToWatchlist": "Add to Watchlist",
+    "@addToWatchlist": {
+      "description": "Text for adding content to watchlist"
+    },
+    "removeFromWatchlist": "Remove from Watchlist",
+    "@removeFromWatchlist": {
+      "description": "Text for removing content from watchlist"
+    },
+    "profile": "Profile",
+    "@profile": {
+      "description": "Text for profile section"
+    },
+    "favoritesMovies": "Favorites Movies",
+    "@favoritesMovies": {
+      "description": "Text for favorites movies section"
+    },
+    "deviceInformation": "Device Information",
+    "@deviceInformation": {
+      "description": "Text for device information section"
+    },
+    "language": "Language",
+    "@language": {
+      "description": "Text for language section"
+    },
+    "deviceModel": "Device Model",
+    "@deviceModel": {
+      "description": "Text for device model information"
+    },
+    "osVersion": "OS Version",
+    "@osVersion": {
+      "description": "Text for operating system version"
+    },
+    "availableStorageSpace": "Available Storage Space",
+    "@availableStorageSpace": {
+      "description": "Text for available storage space information"
+    },
+    "batteryLevel": "Battery Level",
+    "@batteryLevel": {
+      "description": "Text for battery level information"
+    },
+    "logout": "Logout",
+    "@logout": {
+      "description": "Text for logout button"
+    }
+  }

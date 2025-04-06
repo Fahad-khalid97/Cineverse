@@ -69,6 +69,11 @@ class AppFonts {
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
+  static const TextStyle subtitle1Bold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
 
   static const TextStyle subtitle2 = TextStyle(
     fontFamily: _fontFamily,

@@ -11,19 +11,9 @@ class ProfileOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          title,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyLarge?.copyWith(color: AppColors.white),
-        ),
+        Text(title, style: Theme.of(context).textTheme.bodyLarge),
         const Spacer(),
-        Text(
-          value.toString(),
-          style: Theme.of(
-            context,
-          ).textTheme.bodyLarge?.copyWith(color: AppColors.white),
-        ),
+        Text(value.toString(), style: Theme.of(context).textTheme.bodyLarge),
       ],
     );
   }

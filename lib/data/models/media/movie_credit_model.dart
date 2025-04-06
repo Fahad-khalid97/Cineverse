@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-
+import 'package:cineverse/core/api/api_constants.dart';
 part 'movie_credit_model.g.dart';
 
 @JsonSerializable()
@@ -55,6 +55,12 @@ class CastModel {
       _$CastModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$CastModelToJson(this);
+
+  // Helper method to get the full poster URL
+  String getPosterUrl([String size = 'w500']) {
+    if (profilePath == null) return '';
+    return '${ApiConstants.imageBaseUrl}$size$profilePath';
+  }
 }
 
 @JsonSerializable()

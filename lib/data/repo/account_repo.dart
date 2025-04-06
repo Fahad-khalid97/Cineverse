@@ -18,7 +18,7 @@ class AccountRepo {
   Future<MovieListResponse> getWatchlistMovies({
     required int accountId,
     required String sessionId,
-    String language = "en-US",
+    String? language,
     String sortBy = "created_at.asc",
     int page = 1,
   }) async {
@@ -46,7 +46,7 @@ class AccountRepo {
   Future<MovieListResponse> getFavoriteMovies({
     required int accountId,
     required String sessionId,
-    String language = "en-US",
+    String? language,
     String sortBy = "created_at.asc",
     int page = 1,
   }) async {

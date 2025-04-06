@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'dart:developer';
-import 'package:flutter/material.dart';
 
 @lazySingleton
 class AuthInterceptor extends Interceptor {
@@ -18,13 +16,6 @@ class AuthInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     // TODO: implement onResponse
     super.onResponse(response, handler);
-    log('onResponse: ${response.data}');
-    log('onResponse: ${response.headers}');
-    log('onResponse: ${response.requestOptions}');
-    log('onResponse: ${response.statusCode}');
-    log('onResponse: ${response.statusMessage}');
-    log('onResponse: ${response.isRedirect}');
-    log('onResponse: ${response.realUri}');
   }
 
   @override

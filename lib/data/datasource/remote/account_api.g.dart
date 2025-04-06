@@ -50,7 +50,7 @@ class _AccountAPI implements AccountAPI {
   Future<MovieListResponse> getWatchlistMovies({
     required int accountId,
     required String sessionId,
-    String language = "en-US",
+    String? language,
     String sortBy = "created_at.asc",
     int page = 1,
   }) async {
@@ -61,6 +61,7 @@ class _AccountAPI implements AccountAPI {
       r'sort_by': sortBy,
       r'page': page,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<MovieListResponse>(
@@ -120,7 +121,7 @@ class _AccountAPI implements AccountAPI {
   Future<MovieListResponse> getFavoriteMovies({
     required int accountId,
     required String sessionId,
-    String language = "en-US",
+    String? language,
     String sortBy = "created_at.asc",
     int page = 1,
   }) async {
@@ -131,6 +132,7 @@ class _AccountAPI implements AccountAPI {
       r'sort_by': sortBy,
       r'page': page,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<MovieListResponse>(

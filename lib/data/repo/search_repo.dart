@@ -11,10 +11,10 @@ class SearchRepo {
   SearchRepo(this._searchAPI);
 
   Future<MovieListResponse> searchMovies({
-    String language = "en-US",
+    String? language,
     required String query,
     int page = 1,
-    bool includeAdult = false,
+    bool? includeAdult,
     int? year,
   }) async {
     return await _searchAPI.searchMovies(
@@ -27,10 +27,10 @@ class SearchRepo {
   }
 
   Future<MovieListResponse> discoverMovies({
-    String language = "en-US",
+    String? language,
     String sortBy = "popularity.desc",
-    bool includeAdult = false,
-    bool includeVideo = false,
+    bool? includeAdult,
+    bool? includeVideo,
     int page = 1,
     String? withGenres,
     int? year,
@@ -46,7 +46,7 @@ class SearchRepo {
     );
   }
 
-  Future<GenreListResponse> getMovieGenres({String language = "en-US"}) async {
+  Future<GenreListResponse> getMovieGenres({String? language}) async {
     return await _searchAPI.getMovieGenres(language: language);
   }
 }

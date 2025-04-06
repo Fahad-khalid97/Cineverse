@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widget/dumb_widget/profile_option.dart';
 import '../../../../theme/app_colors.dart';
 import '../widget/dumb_widget/device_info.dart';
+import 'package:cineverse/l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -12,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: Text(AppLocalizations.of(context)!.profile),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings_outlined),
@@ -36,41 +37,109 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: 14.h),
               Text(
                 'Fahad Khalid',
-                style: Theme.of(
-                  context,
-                ).textTheme.displayLarge?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               SizedBox(height: 4.h),
               Text(
                 'Joined in 2025',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.secondaryTextColor,
-                ),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               SizedBox(height: 4.h),
-              Text(
-                'Pakistan',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.secondaryTextColor,
-                ),
-              ),
+              Text('Pakistan', style: Theme.of(context).textTheme.bodyLarge),
               SizedBox(height: 25.h),
               Column(
                 spacing: 28.h,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProfileOption(title: 'Watched Movies', value: 45),
-                  ProfileOption(title: 'Favorite Movies', value: 4),
-                  Text(
-                    'Device Information',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.headlineSmall?.copyWith(color: AppColors.white),
+                  ProfileOption(
+                    title: AppLocalizations.of(context)!.watchedMovies,
+                    value: 45,
                   ),
-                  DeviceInfo(title: 'Device Name', value: 'IPhone 4s'),
-                  DeviceInfo(title: 'OS Version', value: '18.0.1'),
-                  DeviceInfo(title: 'Storage', value: '43 GB'),
-                  DeviceInfo(title: 'Battery Level', value: '88%'),
+                  ProfileOption(
+                    title: AppLocalizations.of(context)!.favoritesMovies,
+                    value: 4,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.deviceInformation,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  DeviceInfo(
+                    title: AppLocalizations.of(context)!.deviceModel,
+                    value: 'IPhone 4s',
+                  ),
+                  DeviceInfo(
+                    title: AppLocalizations.of(context)!.osVersion,
+                    value: '18.0.1',
+                  ),
+                  DeviceInfo(
+                    title: AppLocalizations.of(context)!.availableStorageSpace,
+                    value: '43 GB',
+                  ),
+                  DeviceInfo(
+                    title: AppLocalizations.of(context)!.batteryLevel,
+                    value: '88%',
+                  ),
+                  Text(
+                    "App Settings",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    spacing: 4.h,
+                    children: [
+                      Text(
+                        "Set Language",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      DropdownButton(
+                        items: const [
+                          DropdownMenuItem(
+                            value: 'English',
+                            child: Text('English'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Arabic',
+                            child: Text('Arabic'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'French',
+                            child: Text('French'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Spanish',
+                            child: Text('Spanish'),
+                          ),
+                        ],
+                        onChanged: (value) {},
+                      ),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    spacing: 4.h,
+                    children: [
+                      Text(
+                        "Set Theme",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      DropdownButton(
+                        items: const [
+                          DropdownMenuItem(
+                            value: 'Light',
+                            child: Text('Light'),
+                          ),
+                          DropdownMenuItem(value: 'Dark', child: Text('Dark')),
+                          DropdownMenuItem(
+                            value: 'System',
+                            child: Text('System'),
+                          ),
+                        ],
+                        onChanged: (value) {},
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ],

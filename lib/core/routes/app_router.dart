@@ -9,6 +9,7 @@ import 'package:cineverse/features/movie/movie_details/view/movie_details_screen
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:cineverse/data/models/media/movie_model.dart';
 
 @lazySingleton
 class AppRouter {
@@ -33,10 +34,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const MyListScreen());
 
       case AppRoutes.movieDetails:
-        // final args = settings.arguments as Map<String, dynamic>;
-        // final movieId = args['movieId'] as int;
+        final args = settings.arguments as Map<String, dynamic>;
+        final movie = args['movie'] as MovieModel;
         return MaterialPageRoute(
-          builder: (_) => MovieDetailsScreen(movieId: 500),
+          builder: (_) => MovieDetailsScreen(movie: movie),
         );
 
       default:

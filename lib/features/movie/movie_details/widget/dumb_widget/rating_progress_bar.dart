@@ -18,14 +18,12 @@ class RatingProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Row(
       spacing: 8.w,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          rating.toString(),
-          style: AppFonts.subtitle2Regular.copyWith(color: AppColors.white),
-        ),
+        Text(rating.toString(), style: Theme.of(context).textTheme.titleSmall),
         SizedBox(
           width: 168.w,
           child: LinearProgressBar(
@@ -34,15 +32,14 @@ class RatingProgressBar extends StatelessWidget {
             currentStep: progress,
             borderRadius: BorderRadius.circular(12.r),
             progressType: LinearProgressBar.progressTypeLinear,
-            backgroundColor: AppColors.secondary,
+            backgroundColor:
+                isDarkMode ? AppColors.secondary : AppColors.secondaryTextColor,
             progressColor: AppColors.buttonColor,
           ),
         ),
         Text(
           '${(progress / maxSteps * 100).toInt()}%',
-          style: AppFonts.subtitle2Regular.copyWith(
-            color: AppColors.secondaryTextColor,
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ],
     );

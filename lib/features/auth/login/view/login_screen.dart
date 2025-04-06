@@ -31,7 +31,6 @@ class LoginScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const BottomNavBar()),
             );
           } else if (state is LoginError) {
-            log('Login error: ${state.message}');
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(state.message)));
@@ -51,9 +50,6 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         TextFormField(
                           controller: emailController,
-                          style: AppFonts.body1.copyWith(
-                            color: AppColors.white,
-                          ),
                           decoration: InputDecoration(
                             labelText: 'Username',
                             hintText: 'Enter your username',

@@ -29,22 +29,29 @@ class ApiConstants {
       '/account/{account_id}/favorite/movies';
   static const String accountMarkFavorite = '/account/{account_id}/favorite';
 
+  // Movie
   static const String moviePopular = '/movie/popular';
   static const String movieTopRated = '/movie/top_rated';
-  static const String movieNowPlaying = '/movie/now_playing';
   static const String movieUpcoming = '/movie/upcoming';
   static const String movieDetails = '/movie/{movie_id}';
   static const String movieCredits = '/movie/{movie_id}/credits';
-  static const String movieVideos = '/movie/{movie_id}/videos';
-  static const String movieSimilar = '/movie/{movie_id}/similar';
   static const String movieReviews = '/movie/{movie_id}/reviews';
-  static const String movieRecommendations =
-      '/movie/{movie_id}/recommendations';
-  static const String movieRating = '/movie/{movie_id}/rating';
 
   static const String searchMovie = '/search/movie';
   static const String discoverMovie = '/discover/movie';
   static const String genreList = '/genre/movie/list';
+
+  // TV Shows
+  static const String tvPopular = '/tv/popular';
+  static const String tvTopRated = '/tv/top_rated';
+  static const String tvUpcoming = '/tv/upcoming';
+  static const String tvDetails = '/tv/{id}';
+  static const String tvReviews = '/tv/{id}/reviews';
+  static const String tvCredits = '/tv/{id}/credits';
+
+  static const String searchTv = '/search/tv';
+  static const String discoverTv = '/discover/tv';
+  static const String genreListTv = '/genre/tv/list';
 
   static const String configuration = '/configuration';
   static const String configurationLanguages = '/configuration/languages';

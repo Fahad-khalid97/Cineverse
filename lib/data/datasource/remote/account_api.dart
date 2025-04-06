@@ -24,7 +24,7 @@ abstract class AccountAPI {
   Future<MovieListResponse> getWatchlistMovies({
     @Path("account_id") required int accountId,
     @Query("session_id") required String sessionId,
-    @Query("language") String language = "en-US",
+    @Query("language") String? language,
     @Query("sort_by") String sortBy = "created_at.asc",
     @Query("page") int page = 1,
   });
@@ -40,7 +40,7 @@ abstract class AccountAPI {
   Future<MovieListResponse> getFavoriteMovies({
     @Path("account_id") required int accountId,
     @Query("session_id") required String sessionId,
-    @Query("language") String language = "en-US",
+    @Query("language") String? language,
     @Query("sort_by") String sortBy = "created_at.asc",
     @Query("page") int page = 1,
   });
