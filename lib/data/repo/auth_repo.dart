@@ -1,4 +1,4 @@
-import 'package:cineverse/data/datasource/remote/auth_api.dart';
+import 'package:cineverse/features/auth/login/api/auth_api.dart';
 import 'package:injectable/injectable.dart';
 
 import '../models/auth/auth_resp.dart';
@@ -26,8 +26,9 @@ class AuthRepo {
   }
 
   Future<DeleteSessionResponse> deleteSession(
+    String apiKey,
     Map<String, dynamic> sessionId,
   ) async {
-    return await _authAPI.deleteSession(sessionId: sessionId);
+    return await _authAPI.deleteSession(apiKey, sessionId);
   }
 }

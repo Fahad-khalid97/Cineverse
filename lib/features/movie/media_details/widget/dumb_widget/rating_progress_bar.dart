@@ -18,6 +18,8 @@ class RatingProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final clampedProgress = progress.clamp(0, maxSteps);
+    final percent = ((clampedProgress / maxSteps) * 100).toInt();
     return Row(
       spacing: 8.w,
       mainAxisSize: MainAxisSize.min,
@@ -36,10 +38,7 @@ class RatingProgressBar extends StatelessWidget {
             progressColor: AppColors.buttonColor,
           ),
         ),
-        Text(
-          '${(progress / maxSteps * 100).toInt()}%',
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
+        Text('$percent%', style: Theme.of(context).textTheme.titleSmall),
       ],
     );
   }

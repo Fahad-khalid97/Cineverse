@@ -96,6 +96,48 @@ final class MediaDetailLoaded extends MediaDetailState {
   ];
 }
 
+final class MediaDetailWatchlistAdded extends MediaDetailState {
+  const MediaDetailWatchlistAdded({
+    required super.movie,
+    required super.reviews,
+    required super.authorDetails,
+    required super.cast,
+    required super.crew,
+    required super.rating,
+  });
+
+  @override
+  List<Object?> get props => [
+    movie,
+    reviews,
+    authorDetails,
+    rating,
+    cast,
+    crew,
+  ];
+}
+
+final class MediaDetailFavoritesAdded extends MediaDetailState {
+  const MediaDetailFavoritesAdded({
+    required super.movie,
+    required super.reviews,
+    required super.authorDetails,
+    required super.cast,
+    required super.crew,
+    required super.rating,
+  });
+
+  @override
+  List<Object?> get props => [
+    movie,
+    reviews,
+    authorDetails,
+    rating,
+    cast,
+    crew,
+  ];
+}
+
 final class MediaDetailError extends MediaDetailState {
   final String error;
   const MediaDetailError({

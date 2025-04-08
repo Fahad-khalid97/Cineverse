@@ -4,8 +4,8 @@ import 'package:retrofit/retrofit.dart';
 import 'package:cineverse/core/api/api_constants.dart';
 import 'package:cineverse/data/models/auth/session_model.dart';
 
-import '../../models/auth/auth_resp.dart';
-import '../../models/auth/session_delete_model.dart';
+import '../../../../data/models/auth/auth_resp.dart';
+import '../../../../data/models/auth/session_delete_model.dart';
 
 part 'auth_api.g.dart';
 
@@ -29,7 +29,8 @@ abstract class AuthAPI {
   });
 
   @DELETE(ApiConstants.authDeleteSession)
-  Future<DeleteSessionResponse> deleteSession({
-    @Body() required Map<String, dynamic> sessionId,
-  });
+  Future<DeleteSessionResponse> deleteSession(
+    @Query('api_key') String apiKey, // API key as query parameter
+    @Body() Map<String, dynamic> body, // body data
+  );
 }

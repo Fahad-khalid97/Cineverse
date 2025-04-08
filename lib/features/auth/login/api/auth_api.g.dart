@@ -126,12 +126,14 @@ class _AuthAPI implements AuthAPI {
 
   @override
   Future<DeleteSessionResponse> deleteSession(
-      {required Map<String, dynamic> sessionId}) async {
+    String apiKey,
+    Map<String, dynamic> body,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(sessionId);
+    _data.addAll(body);
     final _options = _setStreamType<DeleteSessionResponse>(Options(
       method: 'DELETE',
       headers: _headers,

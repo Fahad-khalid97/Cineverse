@@ -105,6 +105,18 @@ abstract class AppLocalizations {
   /// **'Search for a movie'**
   String get searchForMovie;
 
+  /// Text for add to watchlist success
+  ///
+  /// In en, this message translates to:
+  /// **'Added to watchlist'**
+  String get addToWatchlistSuccess;
+
+  /// Text for add to favorites success
+  ///
+  /// In en, this message translates to:
+  /// **'Added to favorites'**
+  String get addToFavoritesSuccess;
+
   /// Text for app settings section
   ///
   /// In en, this message translates to:
@@ -116,6 +128,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error'**
   String get error;
+
+  /// Text for enter username section
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your username'**
+  String get enterYourUsername;
+
+  /// Text for enter password section
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get enterYourPassword;
 
   /// Text for set language section
   ///
@@ -344,6 +368,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
+
+  /// Text for favorites TV shows section
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites TV Shows'**
+  String get favoritesTVShows;
+
+  /// Text for watched TV shows section
+  ///
+  /// In en, this message translates to:
+  /// **'Watched TV Shows'**
+  String get watchedTVShows;
+
+  /// Text for movies information section
+  ///
+  /// In en, this message translates to:
+  /// **'Movies Information'**
+  String get moviesInformation;
+
+  /// Text for TV shows information section
+  ///
+  /// In en, this message translates to:
+  /// **'TV Shows Information'**
+  String get tvShowsInformation;
+
+  /// Text for no movies found section
+  ///
+  /// In en, this message translates to:
+  /// **'No movies found'**
+  String get noMoviesFound;
+
+  /// Text for no TV shows found section
+  ///
+  /// In en, this message translates to:
+  /// **'No TV shows found'**
+  String get noTVShowsFound;
+
+  /// Placeholder text for TV show search input
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a TV show'**
+  String get searchForTvShow;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

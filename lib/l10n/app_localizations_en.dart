@@ -12,10 +12,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchForMovie => 'Search for a movie';
 
   @override
+  String get addToWatchlistSuccess => 'Added to watchlist';
+
+  @override
+  String get addToFavoritesSuccess => 'Added to favorites';
+
+  @override
   String get appSettings => 'App Settings';
 
   @override
   String get error => 'Error';
+
+  @override
+  String get enterYourUsername => 'Enter your username';
+
+  @override
+  String get enterYourPassword => 'Enter your password';
 
   @override
   String get setLanguage => 'Set Language';
@@ -130,4 +142,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
+
+  @override
+  String get favoritesTVShows => 'Favorites TV Shows';
+
+  @override
+  String get watchedTVShows => 'Watched TV Shows';
+
+  @override
+  String get moviesInformation => 'Movies Information';
+
+  @override
+  String get tvShowsInformation => 'TV Shows Information';
+
+  @override
+  String get noMoviesFound => 'No movies found';
+
+  @override
+  String get noTVShowsFound => 'No TV shows found';
+
+  @override
+  String get searchForTvShow => 'Search for a TV show';
 }

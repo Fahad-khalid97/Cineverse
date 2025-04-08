@@ -121,8 +121,8 @@ class AppTheme {
       iconTheme: IconThemeData(color: AppColors.primary),
       iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(
-          backgroundColor: AppColors.secondary,
-          foregroundColor: AppColors.primary,
+          backgroundColor: AppColors.secondaryTextColor,
+          foregroundColor: AppColors.backgroundColor,
         ),
       ),
 

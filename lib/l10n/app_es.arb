@@ -39,5 +39,14 @@
     "availableStorageSpace": "Espacio de almacenamiento disponible",
     "batteryLevel": "Nivel de batería",
     "logout": "Cerrar sesión",
-    "error": "Error"
+    "error": "Error",
+    "enterYourUsername": "Ingrese su nombre de usuario",
+    "enterYourPassword": "Ingrese su contraseña",
+    "addToWatchlistSuccess": "Añadido a la lista",
+    "addToFavoritesSuccess": "Añadido a favoritos",
+    "favoritesTVShows": "Series Favoritas",
+    "watchedTVShows": "Series Vistas",
+    "noMoviesFound": "No se encontraron películas",
+    "noTVShowsFound": "No se encontraron series",
+    "searchForTvShow": "Buscar una serie"
 }

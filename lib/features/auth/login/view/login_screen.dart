@@ -9,6 +9,7 @@ import '../bloc/login_state.dart';
 import 'package:cineverse/di/di.dart';
 import 'package:cineverse/theme/app_colors.dart';
 import 'package:cineverse/core/routes/app_routes.dart';
+import 'package:cineverse/l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(title: const Text('Sign In')),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.signIn)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -55,8 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
-                            labelText: 'Username',
-                            hintText: 'Enter your username',
+                            labelText: AppLocalizations.of(context)!.username,
+                            hintText:
+                                AppLocalizations.of(context)!.enterYourUsername,
                           ),
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
@@ -66,8 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: passwordController,
 
                           decoration: InputDecoration(
-                            labelText: 'Password',
-                            hintText: 'Enter your password',
+                            labelText: AppLocalizations.of(context)!.password,
+                            hintText:
+                                AppLocalizations.of(context)!.enterYourPassword,
                             suffixIcon: IconButton(
                               icon: Icon(
                                 isPasswordHidden
@@ -98,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           // Handle forgot password action
                         },
                         child: Text(
-                          'Forgot Password?',
+                          AppLocalizations.of(context)!.forgotPassword,
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ),
@@ -148,11 +151,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 20.h),
                   RichText(
                     text: TextSpan(
-                      text: 'New user? ',
+                      text: AppLocalizations.of(context)!.newUser,
                       style: Theme.of(context).textTheme.titleLarge,
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Sign Up',
+                          text: AppLocalizations.of(context)!.signUp,
                           style: Theme.of(context).textTheme.titleLarge,
                           recognizer:
                               TapGestureRecognizer()
@@ -165,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 30.h),
                   Text(
-                    'By continuing, you agree to the Terms of Use. Read our Privacy Policy.',
+                    AppLocalizations.of(context)!.termsAgreement,
                     textAlign: TextAlign.center,
                     style: AppFonts.subtitle2Regular.copyWith(
                       color: Theme.of(context).textTheme.labelMedium?.color,

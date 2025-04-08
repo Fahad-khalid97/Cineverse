@@ -39,5 +39,16 @@
     "availableStorageSpace": "Espace de stockage disponible",
     "batteryLevel": "Niveau de batterie",
     "logout": "Déconnexion",
-    "error": "Erreur"
+    "error": "Erreur",
+    "enterYourUsername": "Entrez votre nom d'utilisateur",
+    "enterYourPassword": "Entrez votre mot de passe",
+    "addToWatchlistSuccess": "Ajouté à la liste",
+    "addToFavoritesSuccess": "Ajouté aux favoris",
+    "favoritesTVShows": "Séries TV Favoris",
+    "watchedTVShows": "Séries TV Vues",
+    "moviesInformation": "Informations sur les films",
+    "tvShowsInformation": "Informations sur les séries TV",
+    "noMoviesFound": "Aucun film trouvé",
+    "noTVShowsFound": "Aucune série TV trouvée",
+    "searchForTvShow": "Rechercher une série"
   }

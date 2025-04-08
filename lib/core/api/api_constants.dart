@@ -30,6 +30,10 @@ class ApiConstants {
   static const String accountFavorites =
       '/account/{account_id}/favorite/movies';
   static const String accountMarkFavorite = '/account/{account_id}/favorite';
+  static const String accountFavoriteTVShows =
+      '/account/{account_id}/favorite/tv';
+  static const String accountWatchlistTVShows =
+      '/account/{account_id}/watchlist/tv';
 
   // Movie
   static const String moviePopular = '/movie/popular';

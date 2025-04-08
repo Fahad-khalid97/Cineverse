@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../data/repo/auth_repo.dart';
 import 'login_state.dart';
 import 'package:cineverse/core/api/dio_client.dart';
+import 'package:cineverse/core/store/secure_storage_service.dart';
 import 'package:cineverse/di/di.dart';
 import 'package:dio/dio.dart';
 
@@ -13,7 +14,6 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._authRepo) : super(LoginInitial());
 
   Future<void> login({required String email, required String password}) async {
-    final dioClient = getIt<DioClient>();
     try {
       emit(LoginLoading());
       final requestTokenResponse = await _authRepo.createRequestToken();
@@ -36,8 +36,9 @@ class LoginCubit extends Cubit<LoginState> {
       final sessionResponse = await _authRepo.createSession({
         'request_token': validateResponse.requestToken,
       });
+      final secureStorage = SecureStorageService();
 
-      dioClient.sessionId = sessionResponse.sessionId;
+      await secureStorage.saveSessionId(sessionResponse.sessionId);
 
       if (!sessionResponse.success) {
         emit(LoginError(message: 'Failed to create session'));

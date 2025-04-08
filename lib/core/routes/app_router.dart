@@ -37,8 +37,9 @@ class AppRouter {
       case AppRoutes.movieDetails:
         final args = settings.arguments as Map<String, dynamic>;
         final movie = args['movie'] as MovieModel;
+        final type = args['type'] as String;
         return MaterialPageRoute(
-          builder: (_) => MediaDetailScreen(movie: movie),
+          builder: (_) => MediaDetailScreen(movie: movie, type: type),
         );
       case AppRoutes.bottomNav:
         return MaterialPageRoute(builder: (_) => const BottomNavBar());

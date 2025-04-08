@@ -1,4 +1,5 @@
 import 'package:cineverse/core/api/dio_client.dart';
+import 'package:cineverse/core/store/secure_storage_service.dart';
 import 'package:cineverse/core/routes/app_router.dart';
 import 'package:cineverse/di/di.dart';
 import 'package:cineverse/features/account/profile_setting/bloc/profile/profile_cubit.dart';
@@ -19,6 +20,7 @@ import 'package:cineverse/features/auth/login/view/login_screen.dart';
 import 'package:cineverse/features/account/profile_setting/bloc/profile/profile_state.dart';
 
 import 'package:cineverse/features/movie/media_details/bloc/media_detail/media_detail_cubit.dart';
+import 'package:cineverse/objectbox.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +29,8 @@ void main() async {
   await dotenv.load(fileName: ".env");
 
   // Initialize dependencies
-  await setUpDependencyInjection();
+  final store = await openStore();
+  await setUpDependencyInjection(store);
 
   runApp(const MyApp());
 }
@@ -98,14 +101,28 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    var dio = getIt<DioClient>();
     return AnimatedSplashScreen(
       duration: 1000,
       splash: Image.asset(AppImage.logo, fit: BoxFit.cover),
       splashIconSize: 200,
       backgroundColor: Theme.of(context).primaryColor,
-      nextScreen:
-          dio.sessionId != null ? const BottomNavBar() : const LoginScreen(),
+      nextScreen: const SplashRedirect(),
+    );
+  }
+}
+
+class SplashRedirect extends StatelessWidget {
+  const SplashRedirect({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: SecureStorageService().getSessionId(),
+      builder: (context, snapshot) {
+        return snapshot.data != null
+            ? const BottomNavBar()
+            : const LoginScreen();
+      },
     );
   }
 }

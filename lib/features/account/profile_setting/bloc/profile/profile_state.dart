@@ -7,6 +7,8 @@ sealed class ProfileState extends Equatable {
   final AccountDetailsModel accountDetails;
   final int favoriteMoviesCount;
   final int watchlistMoviesCount;
+  final int favoriteTVShowsCount;
+  final int watchlistTVShowsCount;
   final DeviceDetailModel deviceDetail;
   final AppSettingModel appSetting;
 
@@ -14,6 +16,8 @@ sealed class ProfileState extends Equatable {
     required this.accountDetails,
     required this.favoriteMoviesCount,
     required this.watchlistMoviesCount,
+    required this.favoriteTVShowsCount,
+    required this.watchlistTVShowsCount,
     required this.deviceDetail,
     required this.appSetting,
   });
@@ -24,6 +28,8 @@ final class ProfileInitial extends ProfileState {
     required super.accountDetails,
     required super.favoriteMoviesCount,
     required super.watchlistMoviesCount,
+    required super.favoriteTVShowsCount,
+    required super.watchlistTVShowsCount,
     required super.deviceDetail,
     required super.appSetting,
   });
@@ -43,6 +49,8 @@ final class ProfileLoadingState extends ProfileState {
     required super.accountDetails,
     required super.favoriteMoviesCount,
     required super.watchlistMoviesCount,
+    required super.favoriteTVShowsCount,
+    required super.watchlistTVShowsCount,
     required super.deviceDetail,
     required super.appSetting,
   });
@@ -52,6 +60,8 @@ final class ProfileLoadingState extends ProfileState {
     accountDetails,
     favoriteMoviesCount,
     watchlistMoviesCount,
+    favoriteTVShowsCount,
+    watchlistTVShowsCount,
     deviceDetail,
     appSetting,
   ];
@@ -62,6 +72,8 @@ final class ProfileLoadedState extends ProfileState {
     required super.accountDetails,
     required super.favoriteMoviesCount,
     required super.watchlistMoviesCount,
+    required super.favoriteTVShowsCount,
+    required super.watchlistTVShowsCount,
     required super.deviceDetail,
     required super.appSetting,
   });
@@ -70,6 +82,8 @@ final class ProfileLoadedState extends ProfileState {
     AccountDetailsModel? accountDetails,
     int? favoriteMoviesCount,
     int? watchlistMoviesCount,
+    int? favoriteTVShowsCount,
+    int? watchlistTVShowsCount,
     DeviceDetailModel? deviceDetail,
     AppSettingModel? appSetting,
   }) {
@@ -77,6 +91,9 @@ final class ProfileLoadedState extends ProfileState {
       accountDetails: accountDetails ?? this.accountDetails,
       favoriteMoviesCount: favoriteMoviesCount ?? this.favoriteMoviesCount,
       watchlistMoviesCount: watchlistMoviesCount ?? this.watchlistMoviesCount,
+      favoriteTVShowsCount: favoriteTVShowsCount ?? this.favoriteTVShowsCount,
+      watchlistTVShowsCount:
+          watchlistTVShowsCount ?? this.watchlistTVShowsCount,
       deviceDetail: deviceDetail ?? this.deviceDetail,
       appSetting: appSetting ?? this.appSetting,
     );
@@ -87,6 +104,8 @@ final class ProfileLoadedState extends ProfileState {
     accountDetails,
     favoriteMoviesCount,
     watchlistMoviesCount,
+    favoriteTVShowsCount,
+    watchlistTVShowsCount,
     deviceDetail,
     appSetting,
   ];
@@ -98,6 +117,8 @@ final class ProfileErrorState extends ProfileState {
     required super.accountDetails,
     required super.favoriteMoviesCount,
     required super.watchlistMoviesCount,
+    required super.favoriteTVShowsCount,
+    required super.watchlistTVShowsCount,
     required super.deviceDetail,
     required super.appSetting,
     required this.error,
@@ -108,6 +129,8 @@ final class ProfileErrorState extends ProfileState {
     accountDetails,
     favoriteMoviesCount,
     watchlistMoviesCount,
+    favoriteTVShowsCount,
+    watchlistTVShowsCount,
     deviceDetail,
     appSetting,
     error,

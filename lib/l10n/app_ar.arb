@@ -39,5 +39,16 @@
     "availableStorageSpace": "المساحة المتاحة للتخزين",
     "batteryLevel": "مستوى البطارية",
     "logout": "تسجيل الخروج",
-    "error": "خطأ"
+    "error": "خطأ",
+    "enterYourUsername": "ادخل اسم المستخدم",
+    "enterYourPassword": "ادخل كلمة المرور",
+    "addToWatchlistSuccess": "تم إضافة الى قائمة المشاهدة",
+    "addToFavoritesSuccess": "تم إضافة الى المفضلة",
+    "favoritesTVShows": "المسلسلات المفضلة",
+    "watchedTVShows": "المسلسلات المشاهدة",
+    "moviesInformation": "معلومات الأفلام",
+    "tvShowsInformation": "معلومات المسلسلات",
+    "noMoviesFound": "لا يوجد أفلام",
+    "noTVShowsFound": "لا يوجد مسلسلات",
+    "searchForTvShow": "ابحث عن مسلسل"
 }

@@ -1,13 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:cineverse/core/store/secure_store.dart';
+import 'package:cineverse/core/store/secure_storage_service.dart';
 
 @lazySingleton
 class AuthInterceptor extends Interceptor {
   AuthInterceptor();
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final secureStorage = SecureStorageService();
+    final sessionId = await secureStorage.getSessionId();
+    if (sessionId != null &&
+        options.path.contains('authentication') &&
+        options.path.contains('session')) {
+      options.queryParameters['session_id'] = sessionId;
+    }
     super.onRequest(options, handler);
   }
 

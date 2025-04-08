@@ -5,6 +5,8 @@ import 'media_detail_state.dart';
 import 'package:cineverse/di/di.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
+import 'package:cineverse/data/repo/account_repo.dart';
+import 'package:flutter/foundation.dart';
 
 @injectable
 class MediaDetailCubit extends Cubit<MediaDetailState> {
@@ -39,17 +41,9 @@ class MediaDetailCubit extends Cubit<MediaDetailState> {
       var reviews = await movieRepo.getMovieReviews(movieId: movieId);
       var authorDetails =
           reviews.results.map((review) => review.authorDetails).toList();
-      double rating =
-          authorDetails.isEmpty
-              ? 0
-              : double.parse(
-                ((authorDetails
-                                .map((e) => e.rating ?? 0.0)
-                                .reduce((a, b) => a + b) /
-                            authorDetails.length) /
-                        2)
-                    .toStringAsFixed(1),
-              );
+      //use isolates to calculate the rating
+      final ratings = authorDetails.map((e) => e.rating).toList();
+      double rating = await getRatingInIsolate(ratings);
       emit(
         MediaDetailLoaded(
           movie: movie,
@@ -94,17 +88,8 @@ class MediaDetailCubit extends Cubit<MediaDetailState> {
       var reviews = await movieRepo.getTvReviews(id: tvId);
       var authorDetails =
           reviews.results.map((review) => review.authorDetails).toList();
-      double rating =
-          authorDetails.isEmpty
-              ? 0
-              : double.parse(
-                ((authorDetails
-                                .map((e) => e.rating ?? 0.0)
-                                .reduce((a, b) => a + b) /
-                            authorDetails.length) /
-                        2)
-                    .toStringAsFixed(1),
-              );
+      final ratings = authorDetails.map((e) => e.rating).toList();
+      double rating = await getRatingInIsolate(ratings);
       emit(
         MediaDetailLoaded(
           movie: movie,
@@ -130,13 +115,84 @@ class MediaDetailCubit extends Cubit<MediaDetailState> {
     }
   }
 
-  // void addToWatchlist(int movieId) async {
-  //   final accountRepo = getIt<AccountRepo>();
-  //   await accountRepo.addToWatchlist(movieId);
-  // }
+  void addToWatchlist(String type) async {
+    final accountRepo = getIt<AccountRepo>();
+    try {
+      await accountRepo.addToWatchlist(
+        watchlistRequest: {
+          "media_type": type,
+          "media_id": state.movie.id,
+          "watchlist": true,
+        },
+      );
+      emit(
+        MediaDetailWatchlistAdded(
+          movie: state.movie,
+          reviews: state.reviews,
+          authorDetails: state.authorDetails,
+          cast: state.cast,
+          crew: state.crew,
+          rating: state.rating,
+        ),
+      );
+    } catch (e) {
+      emit(
+        MediaDetailError(
+          movie: state.movie,
+          reviews: state.reviews,
+          authorDetails: state.authorDetails,
+          cast: state.cast,
+          crew: state.crew,
+          rating: state.rating,
+          error: e.toString(),
+        ),
+      );
+    }
+  }
 
-  // void removeFromWatchlist(int movieId) async {
-  //   final mediaRepo = getIt<MediaRepo>();
-  //   await mediaRepo.removeFromWatchlist(movieId);
-  // }
+  void addToFavorites(String type) async {
+    final accountRepo = getIt<AccountRepo>();
+    try {
+      await accountRepo.markAsFavorite(
+        favoriteRequest: {
+          "media_type": type,
+          "media_id": state.movie.id,
+          "favorite": true,
+        },
+      );
+      emit(
+        MediaDetailFavoritesAdded(
+          movie: state.movie,
+          reviews: state.reviews,
+          authorDetails: state.authorDetails,
+          cast: state.cast,
+          crew: state.crew,
+          rating: state.rating,
+        ),
+      );
+    } catch (e) {
+      emit(
+        MediaDetailError(
+          movie: state.movie,
+          reviews: state.reviews,
+          authorDetails: state.authorDetails,
+          cast: state.cast,
+          crew: state.crew,
+          rating: state.rating,
+          error: e.toString(),
+        ),
+      );
+    }
+  }
+}
+
+double calculateAverageRating(List<double?> ratings) {
+  if (ratings.isEmpty) return 0;
+  final total = ratings.fold(0.0, (sum, r) => sum + (r ?? 0.0));
+  final average = (total / ratings.length) / 2;
+  return double.parse(average.toStringAsFixed(1));
+}
+
+Future<double> getRatingInIsolate(List<double?> ratings) async {
+  return await compute(calculateAverageRating, ratings);
 }

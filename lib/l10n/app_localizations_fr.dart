@@ -12,10 +12,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchForMovie => 'Rechercher un film';
 
   @override
+  String get addToWatchlistSuccess => 'Ajouté à la liste';
+
+  @override
+  String get addToFavoritesSuccess => 'Ajouté aux favoris';
+
+  @override
   String get appSettings => 'Paramètres de l\'application';
 
   @override
   String get error => 'Erreur';
+
+  @override
+  String get enterYourUsername => 'Entrez votre nom d\'utilisateur';
+
+  @override
+  String get enterYourPassword => 'Entrez votre mot de passe';
 
   @override
   String get setLanguage => 'Changer la langue';
@@ -130,4 +142,25 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get logout => 'Déconnexion';
+
+  @override
+  String get favoritesTVShows => 'Séries TV Favoris';
+
+  @override
+  String get watchedTVShows => 'Séries TV Vues';
+
+  @override
+  String get moviesInformation => 'Informations sur les films';
+
+  @override
+  String get tvShowsInformation => 'Informations sur les séries TV';
+
+  @override
+  String get noMoviesFound => 'Aucun film trouvé';
+
+  @override
+  String get noTVShowsFound => 'Aucune série TV trouvée';
+
+  @override
+  String get searchForTvShow => 'Rechercher une série';
 }

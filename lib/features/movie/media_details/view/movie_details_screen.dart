@@ -4,6 +4,7 @@ import 'package:cineverse/theme/app_images.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widget/dumb_widget/cast_member_card.dart';
 import '../../../../widget/dumb_widget/chip.dart';
 import '../widget/dumb_widget/rating_progress_bar.dart';
@@ -68,23 +69,27 @@ class _MediaDetailScreenState extends State<MediaDetailScreen> {
       appBar: AppBar(
         title: Text(widget.movie?.title ?? widget.movie?.name ?? '--'),
       ),
-      floatingActionButton: SizedBox(
-        width: 340.w,
-        height: 48.h,
-        child: FloatingActionButton.extended(
-          onPressed: () {},
-          backgroundColor: AppColors.secondary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          label: Text(
-            'Add to Watchlist',
-            style: AppFonts.subtitle1Bold.copyWith(color: AppColors.white),
-          ),
-          icon: const Icon(Icons.bookmark_add_outlined, color: Colors.white),
-        ),
-      ),
-      body: BlocBuilder<MediaDetailCubit, MediaDetailState>(
+      body: BlocConsumer<MediaDetailCubit, MediaDetailState>(
+        listener: (context, state) {
+          if (state is MediaDetailWatchlistAdded) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  AppLocalizations.of(context)!.addToWatchlistSuccess,
+                ),
+              ),
+            );
+          }
+          if (state is MediaDetailFavoritesAdded) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  AppLocalizations.of(context)!.addToFavoritesSuccess,
+                ),
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           if (state is MediaDetailError) {
             return CustomErrorWidget(
@@ -94,7 +99,12 @@ class _MediaDetailScreenState extends State<MediaDetailScreen> {
               },
             );
           }
-          if (state is MediaDetailLoaded || state is MediaDetailLoading) {
+          if ([
+            MediaDetailLoaded,
+            MediaDetailLoading,
+            MediaDetailWatchlistAdded,
+            MediaDetailFavoritesAdded,
+          ].contains(state.runtimeType)) {
             return SafeArea(
               child: Container(
                 constraints: BoxConstraints(
@@ -277,9 +287,69 @@ class _MediaDetailScreenState extends State<MediaDetailScreen> {
                                   ],
                                 ),
                               ),
+                              SizedBox(height: 20.h),
+
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      context
+                                          .read<MediaDetailCubit>()
+                                          .addToFavorites(
+                                            widget.type.toString(),
+                                          );
+                                    },
+                                    icon:
+                                        state is MediaDetailFavoritesAdded
+                                            ? FaIcon(
+                                              FontAwesomeIcons.solidHeart,
+                                            )
+                                            : FaIcon(FontAwesomeIcons.heart),
+                                  ),
+                                  MaterialButton(
+                                    height: 48.h,
+                                    minWidth: 300.w,
+                                    color: AppColors.secondary,
+
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    onPressed: () {
+                                      context
+                                          .read<MediaDetailCubit>()
+                                          .addToWatchlist(
+                                            widget.type.toString(),
+                                          );
+                                    },
+                                    child: Row(
+                                      spacing: 6.w,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.bookmark_add_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          state is MediaDetailWatchlistAdded
+                                              ? AppLocalizations.of(
+                                                context,
+                                              )!.addToWatchlistSuccess
+                                              : AppLocalizations.of(
+                                                context,
+                                              )!.addToWatchlist,
+                                          style: AppFonts.subtitle1Bold
+                                              .copyWith(color: AppColors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
+                        //add watchlist button
                       ],
                     ),
                   ),

@@ -5,67 +5,90 @@ import 'dart:convert';
 
 @lazySingleton
 class CacheInterceptor extends Interceptor {
-  CacheInterceptor();
+  final CacheManager cacheManager;
+  CacheInterceptor(this.cacheManager);
 
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    //need to cache only GET requests
-    // if (options.method != 'GET') {
-    // handler.next(options);
-    // }
+    // Cache only GET requests
+    if (options.method != 'GET') {
+      super.onRequest(options, handler);
+      return;
+    }
 
-    // final cachedData = await CacheManager().get(options.path);
+    final cacheKey = await getCacheKey(options);
+    final cachedEntry = cacheManager.getCacheEntry(cacheKey);
 
-    // if (cachedData != null) {
-    //   final cachedResponse = Response(
-    //     requestOptions: options,
-    //     data: jsonDecode(cachedData.data),
-    //     statusCode: 200,
-    //     headers: Headers.fromMap({
-    //       'cache-control': ['max-age=30'],
-    //     }),
-    //     statusMessage: 'OK',
-    //     isRedirect: false,
-    //     extra: {'cached': true, 'cachedAt': cachedData.cachedAt},
-    //   );
+    if (cachedEntry != null) {
+      final cachedResponse = Response(
+        requestOptions: options,
+        data: jsonDecode(cachedEntry.value)['data'],
+        statusCode: 200,
+        headers: Headers.fromMap({
+          'cache-control': ['max-age=30'],
+        }),
+        statusMessage: 'OK',
+        isRedirect: false,
+        extra: {'cached': true, 'cachedAt': cachedEntry.cachedAt},
+      );
+      return handler.resolve(cachedResponse);
+    }
 
-    //   // If cache is still valid (within 30 seconds), return it
-    //   if (CacheManager().isCacheValid(cachedData.cachedAt)) {
-    //     return handler.resolve(cachedResponse);
-    //   }
+    // If cache is not valid or doesn't exist, add it to options to be used if network fails
+    options.extra['cachedData'] = cachedEntry;
 
-    // If cache is invalid but exists, add it to options to be used if network fails
-    //options.extra['cachedResponse'] = cachedResponse;
-    //  }
-
+    // Proceed with the request if no valid cache exists
     super.onRequest(options, handler);
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    //need to cache only GET requests
-    //if (response.requestOptions.method != 'GET') {
-    // handler.next(response);
-    //}
+  void onResponse(Response response, ResponseInterceptorHandler handler) async {
+    // Cache only GET requests with successful status codes
+    if (response.requestOptions.method != 'GET' || response.statusCode != 200) {
+      super.onResponse(response, handler);
+      return;
+    }
 
-    // final cacheKey = response.requestOptions.path;
-    // final cacheData = {
-    //   'key': cacheKey,
-    //   'data': response.data,
-    //   'cachedAt': DateTime.now().toIso8601String(),
-    // };
+    final cacheKey = await getCacheKey(response.requestOptions);
+    final cacheData = {
+      'key': cacheKey,
+      'data': response.data,
+      'cachedAt': DateTime.now().toIso8601String(),
+    };
 
-    // CacheManager().setCache(cacheKey, jsonEncode(cacheData));
+    // Set the cache
+    cacheManager.setCache(cacheKey, jsonEncode(cacheData));
 
+    // Proceed with the response handling
     super.onResponse(response, handler);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    // TODO: implement onError
-    super.onError(err, handler);
+    //if the request is not cached, return the error
+    if (err.requestOptions.extra['cachedData'] == null) {
+      super.onError(err, handler);
+      return;
+    } else {
+      final cacheData = err.requestOptions.extra['cachedData'];
+      handler.resolve(
+        Response(
+          requestOptions: err.requestOptions,
+          data: cacheData['data'],
+          statusCode: 200,
+          statusMessage: 'OK',
+          isRedirect: false,
+        ),
+      );
+    }
+  }
+
+  Future<String> getCacheKey(RequestOptions options) async {
+    final cacheKey =
+        '${options.path}:${jsonEncode(options.queryParameters)}:${options.method}';
+    return cacheKey;
   }
 }

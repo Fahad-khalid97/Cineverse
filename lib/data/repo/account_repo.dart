@@ -50,4 +50,28 @@ class AccountRepo {
   }) async {
     return await _accountAPI.markAsFavorite(favoriteRequest: favoriteRequest);
   }
+
+  Future<MovieListResponse> getFavoriteTVShows({
+    String? language,
+    String sortBy = "created_at.asc",
+    int page = 1,
+  }) async {
+    return await _accountAPI.getFavoriteTVShows(
+      language: language,
+      sortBy: sortBy,
+      page: page,
+    );
+  }
+
+  Future<MovieListResponse> getWatchlistTVShows({
+    String? language,
+    String sortBy = "created_at.asc",
+    int page = 1,
+  }) async {
+    return await _accountAPI.getWatchlistTVShows(
+      language: language,
+      sortBy: sortBy,
+      page: page,
+    );
+  }
 }

@@ -41,4 +41,18 @@ abstract class AccountAPI {
   Future<ResponseModel> markAsFavorite({
     @Body() required Map<String, dynamic> favoriteRequest,
   });
+
+  @GET(ApiConstants.accountFavoriteTVShows)
+  Future<MovieListResponse> getFavoriteTVShows({
+    @Query("language") String? language,
+    @Query("sort_by") String sortBy = "created_at.asc",
+    @Query("page") int page = 1,
+  });
+
+  @GET(ApiConstants.accountWatchlistTVShows)
+  Future<MovieListResponse> getWatchlistTVShows({
+    @Query("language") String? language,
+    @Query("sort_by") String sortBy = "created_at.asc",
+    @Query("page") int page = 1,
+  });
 }

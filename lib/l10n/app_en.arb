@@ -3,6 +3,14 @@
     "@searchForMovie": {
       "description": "Placeholder text for movie search input"
     },
+    "addToWatchlistSuccess": "Added to watchlist",
+    "@addToWatchlistSuccess": {
+      "description": "Text for add to watchlist success"
+    },
+    "addToFavoritesSuccess": "Added to favorites",
+    "@addToFavoritesSuccess": {
+      "description": "Text for add to favorites success"
+    },
     "appSettings": "App Settings",
     "@appSettings": {
       "description": "Text for app settings section"
@@ -10,6 +18,14 @@
     "error": "Error",
     "@error": {
       "description": "Text for error section"
+    },
+    "enterYourUsername": "Enter your username",
+    "@enterYourUsername": {
+      "description": "Text for enter username section"
+    },
+    "enterYourPassword": "Enter your password",
+    "@enterYourPassword": {
+      "description": "Text for enter password section"
     },
     "setLanguage": "Set Language",
     "@setLanguage": {
@@ -162,5 +178,33 @@
     "logout": "Logout",
     "@logout": {
       "description": "Text for logout button"
+    },
+    "favoritesTVShows": "Favorites TV Shows",
+    "@favoritesTVShows": {
+      "description": "Text for favorites TV shows section"
+    },
+    "watchedTVShows": "Watched TV Shows",
+    "@watchedTVShows": {
+      "description": "Text for watched TV shows section"
+    },
+    "moviesInformation": "Movies Information",
+    "@moviesInformation": {
+      "description": "Text for movies information section"
+    },
+    "tvShowsInformation": "TV Shows Information",
+    "@tvShowsInformation": {
+      "description": "Text for TV shows information section"
+    },
+    "noMoviesFound": "No movies found",
+    "@noMoviesFound": {
+      "description": "Text for no movies found section"
+    },
+    "noTVShowsFound": "No TV shows found",
+    "@noTVShowsFound": {
+      "description": "Text for no TV shows found section"
+    },
+    "searchForTvShow": "Search for a TV show",
+    "@searchForTvShow": {
+      "description": "Placeholder text for TV show search input"
     }
-  }
+}

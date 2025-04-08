@@ -12,10 +12,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get searchForMovie => 'البحث عن فيلم';
 
   @override
+  String get addToWatchlistSuccess => 'تم إضافة الى قائمة المشاهدة';
+
+  @override
+  String get addToFavoritesSuccess => 'تم إضافة الى المفضلة';
+
+  @override
   String get appSettings => 'إعدادات التطبيق';
 
   @override
   String get error => 'خطأ';
+
+  @override
+  String get enterYourUsername => 'ادخل اسم المستخدم';
+
+  @override
+  String get enterYourPassword => 'ادخل كلمة المرور';
 
   @override
   String get setLanguage => 'تغيير اللغة';
@@ -130,4 +142,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logout => 'تسجيل الخروج';
+
+  @override
+  String get favoritesTVShows => 'المسلسلات المفضلة';
+
+  @override
+  String get watchedTVShows => 'المسلسلات المشاهدة';
+
+  @override
+  String get moviesInformation => 'معلومات الأفلام';
+
+  @override
+  String get tvShowsInformation => 'معلومات المسلسلات';
+
+  @override
+  String get noMoviesFound => 'لا يوجد أفلام';
+
+  @override
+  String get noTVShowsFound => 'لا يوجد مسلسلات';
+
+  @override
+  String get searchForTvShow => 'ابحث عن مسلسل';
 }

@@ -9,15 +9,8 @@ class DioClient {
   final AuthInterceptor _authInterceptor;
   final CacheInterceptor _cacheInterceptor;
   late final Dio _dio;
-  String? _sessionId;
 
   Dio get dio => _dio;
-
-  // Getter and setter for session ID
-  String? get sessionId => _sessionId;
-  set sessionId(String? value) {
-    _sessionId = value;
-  }
 
   DioClient(this._authInterceptor, this._cacheInterceptor) {
     // Initialize Dio immediately in the constructor

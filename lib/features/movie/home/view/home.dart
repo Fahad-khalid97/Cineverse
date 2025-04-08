@@ -137,7 +137,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: AppFonts.body1.copyWith(color: AppColors.white),
                   decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.search,
-                    hintText: AppLocalizations.of(context)!.searchForMovie,
+                    hintText:
+                        widget.type == 'movie'
+                            ? AppLocalizations.of(context)!.searchForMovie
+                            : AppLocalizations.of(context)!.searchForTvShow,
                     suffixIcon: Icon(
                       Icons.search,
                       color: AppColors.secondaryTextColor,
@@ -187,7 +190,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           : state is HomeLoadedState &&
                               state.movies.isEmpty &&
                               state.genres.isNotEmpty
-                          ? CustomMessageWidget(message: 'No movies found')
+                          ? CustomMessageWidget(
+                            message:
+                                widget.type == 'movie'
+                                    ? AppLocalizations.of(
+                                      context,
+                                    )!.noMoviesFound
+                                    : AppLocalizations.of(
+                                      context,
+                                    )!.noTVShowsFound,
+                          )
                           : Skeletonizer(
                             enabled: state is HomeLoadingState,
                             child: GridView.builder(
