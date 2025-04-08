@@ -12,6 +12,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get searchForMovie => 'البحث عن فيلم';
 
   @override
+  String get appSettings => 'إعدادات التطبيق';
+
+  @override
+  String get error => 'خطأ';
+
+  @override
+  String get setLanguage => 'تغيير اللغة';
+
+  @override
+  String get setTheme => 'تغيير الثيم';
+
+  @override
   String get watchedMovies => 'أفلام مشاهدة';
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cineverse/data/repo/media_repo.dart';
 import 'package:cineverse/di/di.dart';
 import 'my_list_state.dart';
+import 'package:dio/dio.dart';
 
 class MyListCubit extends Cubit<MyListState> {
   MyListCubit()
@@ -29,10 +30,10 @@ class MyListCubit extends Cubit<MyListState> {
           popularPage: state.popularPage + 1,
         ),
       );
-    } catch (error) {
+    } on DioException catch (e) {
       emit(
         MyListError(
-          error: error.toString(),
+          error: e.error.toString(),
           popularMovies: state.popularMovies,
           topRatedMovies: state.topRatedMovies,
           nowPlaying: state.nowPlaying,
@@ -58,10 +59,10 @@ class MyListCubit extends Cubit<MyListState> {
           topRatedPage: state.topRatedPage + 1,
         ),
       );
-    } catch (error) {
+    } on DioException catch (e) {
       emit(
         MyListError(
-          error: error.toString(),
+          error: e.error.toString(),
           popularMovies: state.popularMovies,
           topRatedMovies: state.topRatedMovies,
           nowPlaying: state.nowPlaying,
@@ -87,10 +88,10 @@ class MyListCubit extends Cubit<MyListState> {
           nowPlayingPage: state.nowPlayingPage + 1,
         ),
       );
-    } catch (error) {
+    } on DioException catch (e) {
       emit(
         MyListError(
-          error: error.toString(),
+          error: e.error.toString(),
           popularMovies: state.popularMovies,
           topRatedMovies: state.topRatedMovies,
           nowPlaying: state.nowPlaying,
@@ -116,10 +117,10 @@ class MyListCubit extends Cubit<MyListState> {
           upcomingPage: state.upcomingPage + 1,
         ),
       );
-    } catch (error) {
+    } on DioException catch (e) {
       emit(
         MyListError(
-          error: error.toString(),
+          error: e.error.toString(),
           popularMovies: state.popularMovies,
           topRatedMovies: state.topRatedMovies,
           nowPlaying: state.nowPlaying,

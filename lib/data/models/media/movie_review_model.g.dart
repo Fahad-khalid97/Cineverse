@@ -7,39 +7,37 @@ part of 'movie_review_model.dart';
 // **************************************************************************
 
 MovieReviewsResponse _$MovieReviewsResponseFromJson(
-  Map<String, dynamic> json,
-) => MovieReviewsResponse(
-  id: (json['id'] as num).toInt(),
-  page: (json['page'] as num).toInt(),
-  results:
-      (json['results'] as List<dynamic>)
+        Map<String, dynamic> json) =>
+    MovieReviewsResponse(
+      id: (json['id'] as num).toInt(),
+      page: (json['page'] as num).toInt(),
+      results: (json['results'] as List<dynamic>)
           .map((e) => ReviewModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-  totalPages: (json['total_pages'] as num).toInt(),
-  totalResults: (json['total_results'] as num).toInt(),
-);
+      totalPages: (json['total_pages'] as num).toInt(),
+      totalResults: (json['total_results'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$MovieReviewsResponseToJson(
-  MovieReviewsResponse instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'page': instance.page,
-  'results': instance.results,
-  'total_pages': instance.totalPages,
-  'total_results': instance.totalResults,
-};
+        MovieReviewsResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'page': instance.page,
+      'results': instance.results,
+      'total_pages': instance.totalPages,
+      'total_results': instance.totalResults,
+    };
 
 ReviewModel _$ReviewModelFromJson(Map<String, dynamic> json) => ReviewModel(
-  id: json['id'] as String,
-  author: json['author'] as String,
-  authorDetails: AuthorDetailsModel.fromJson(
-    json['author_details'] as Map<String, dynamic>,
-  ),
-  content: json['content'] as String,
-  createdAt: json['created_at'] as String,
-  updatedAt: json['updated_at'] as String,
-  url: json['url'] as String,
-);
+      id: json['id'] as String,
+      author: json['author'] as String,
+      authorDetails: AuthorDetailsModel.fromJson(
+          json['author_details'] as Map<String, dynamic>),
+      content: json['content'] as String,
+      createdAt: json['created_at'] as String,
+      updatedAt: json['updated_at'] as String,
+      url: json['url'] as String,
+    );
 
 Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
     <String, dynamic>{

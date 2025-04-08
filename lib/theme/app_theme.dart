@@ -3,7 +3,7 @@ import 'package:cineverse/theme/app_fonts.dart' show AppFonts;
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static ThemeData get dartTheme {
+  static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -141,6 +141,7 @@ class AppTheme {
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
+
         fillColor: AppColors.secondaryTextColor,
         hintStyle: AppFonts.body1.copyWith(color: AppColors.secondaryTextColor),
         border: OutlineInputBorder(

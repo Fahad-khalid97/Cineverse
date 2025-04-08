@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:cineverse/core/store/secure_store.dart';
 
 @lazySingleton
 class AuthInterceptor extends Interceptor {
@@ -7,8 +8,6 @@ class AuthInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // Add auth token if available
-    // TODO: Implement token management
     super.onRequest(options, handler);
   }
 

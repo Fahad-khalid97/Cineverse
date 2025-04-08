@@ -1,6 +1,9 @@
 {
     "searchForMovie": "البحث عن فيلم",
     "watchedMovies": "أفلام مشاهدة",
+    "appSettings": "إعدادات التطبيق",
+    "setLanguage": "تغيير اللغة",
+    "setTheme": "تغيير الثيم",
     "nowPlayingMovies": "أفلام معروضة",
     "upcomingMovies": "أفلام مستقبلية",
     "signIn": "تسجيل الدخول",
@@ -35,5 +38,6 @@
     "osVersion": "إصدار نظام التشغيل",
     "availableStorageSpace": "المساحة المتاحة للتخزين",
     "batteryLevel": "مستوى البطارية",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "error": "خطأ"
 }

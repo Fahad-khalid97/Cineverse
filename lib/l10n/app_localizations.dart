@@ -105,6 +105,30 @@ abstract class AppLocalizations {
   /// **'Search for a movie'**
   String get searchForMovie;
 
+  /// Text for app settings section
+  ///
+  /// In en, this message translates to:
+  /// **'App Settings'**
+  String get appSettings;
+
+  /// Text for error section
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// Text for set language section
+  ///
+  /// In en, this message translates to:
+  /// **'Set Language'**
+  String get setLanguage;
+
+  /// Text for set theme section
+  ///
+  /// In en, this message translates to:
+  /// **'Set Theme'**
+  String get setTheme;
+
   /// Text for watched movies section
   ///
   /// In en, this message translates to:

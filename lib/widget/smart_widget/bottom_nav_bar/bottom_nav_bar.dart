@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../theme/app_colors.dart';
 import '../../../features/movie/home/view/home.dart';
 import '../../../features/movie/my_list/view/my_list.dart';
 import '../../../features/account/profile_setting/view/profile_screen.dart';
+import '../../../l10n/app_localizations.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -36,26 +35,26 @@ class _BottomNavBarState extends State<BottomNavBar> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
-            label: 'Home',
+            label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.tv_outlined),
             activeIcon: Icon(Icons.tv),
-            label: 'TV Shows',
+            label: AppLocalizations.of(context)!.tvShows,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.movie_outlined),
             activeIcon: Icon(Icons.movie),
-            label: 'Movies',
+            label: AppLocalizations.of(context)!.movies,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             activeIcon: Icon(Icons.person),
-            label: 'Profile',
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
       ),

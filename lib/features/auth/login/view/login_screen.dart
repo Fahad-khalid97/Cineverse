@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cineverse/data/repo/auth_repo.dart';
 import 'package:cineverse/theme/app_fonts.dart';
 import 'package:flutter/gestures.dart';
@@ -10,25 +8,31 @@ import '../bloc/login_cubit.dart';
 import '../bloc/login_state.dart';
 import 'package:cineverse/di/di.dart';
 import 'package:cineverse/theme/app_colors.dart';
-import 'package:cineverse/widget/smart_widget/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:cineverse/core/routes/app_routes.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool isPasswordHidden = true;
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(getIt<AuthRepo>()),
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
             // Navigate to home screen
-            Navigator.push(
+            Navigator.pushNamedAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => const BottomNavBar()),
+              AppRoutes.bottomNav,
+              (route) => false,
             );
           } else if (state is LoginError) {
             ScaffoldMessenger.of(
@@ -60,14 +64,25 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(height: 15.h),
                         TextFormField(
                           controller: passwordController,
-                          style: AppFonts.body1.copyWith(
-                            color: AppColors.white,
-                          ),
+
                           decoration: InputDecoration(
                             labelText: 'Password',
                             hintText: 'Enter your password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                isPasswordHidden
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: AppColors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  isPasswordHidden = !isPasswordHidden;
+                                });
+                              },
+                            ),
                           ),
-                          obscureText: true,
+                          obscureText: isPasswordHidden,
                           textInputAction: TextInputAction.done,
                         ),
                       ],
@@ -113,8 +128,9 @@ class LoginScreen extends StatelessWidget {
                                         );
                                       } else {
                                         context.read<LoginCubit>().login(
-                                          email: emailController.text,
-                                          password: passwordController.text,
+                                          email: emailController.text.trim(),
+                                          password:
+                                              passwordController.text.trim(),
                                         );
                                       }
                                     },

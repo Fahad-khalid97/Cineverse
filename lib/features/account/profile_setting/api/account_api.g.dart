@@ -9,7 +9,11 @@ part of 'account_api.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _AccountAPI implements AccountAPI {
-  _AccountAPI(this._dio, {this.baseUrl, this.errorLogger});
+  _AccountAPI(
+    this._dio, {
+    this.baseUrl,
+    this.errorLogger,
+  });
 
   final Dio _dio;
 
@@ -18,23 +22,27 @@ class _AccountAPI implements AccountAPI {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AccountDetailsModel> getAccountDetails({
-    required String sessionId,
-  }) async {
+  Future<AccountDetailsModel> getAccountDetails() async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AccountDetailsModel>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/account',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<AccountDetailsModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/account',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late AccountDetailsModel _value;
     try {
@@ -48,15 +56,12 @@ class _AccountAPI implements AccountAPI {
 
   @override
   Future<MovieListResponse> getWatchlistMovies({
-    required int accountId,
-    required String sessionId,
     String? language,
     String sortBy = "created_at.asc",
     int page = 1,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'session_id': sessionId,
       r'language': language,
       r'sort_by': sortBy,
       r'page': page,
@@ -64,16 +69,22 @@ class _AccountAPI implements AccountAPI {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MovieListResponse>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/account/${accountId}/watchlist/movies',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<MovieListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/account/{account_id}/watchlist/movies',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late MovieListResponse _value;
     try {
@@ -86,26 +97,29 @@ class _AccountAPI implements AccountAPI {
   }
 
   @override
-  Future<ResponseModel> addToWatchlist({
-    required int accountId,
-    required String sessionId,
-    required Map<String, dynamic> watchlistRequest,
-  }) async {
+  Future<ResponseModel> addToWatchlist(
+      {required Map<String, dynamic> watchlistRequest}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(watchlistRequest);
-    final _options = _setStreamType<ResponseModel>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/account/${accountId}/watchlist',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<ResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/account/{account_id}/watchlist',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ResponseModel _value;
     try {
@@ -119,15 +133,12 @@ class _AccountAPI implements AccountAPI {
 
   @override
   Future<MovieListResponse> getFavoriteMovies({
-    required int accountId,
-    required String sessionId,
     String? language,
     String sortBy = "created_at.asc",
     int page = 1,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'session_id': sessionId,
       r'language': language,
       r'sort_by': sortBy,
       r'page': page,
@@ -135,16 +146,22 @@ class _AccountAPI implements AccountAPI {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<MovieListResponse>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/account/${accountId}/favorite/movies',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<MovieListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/account/{account_id}/favorite/movies',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late MovieListResponse _value;
     try {
@@ -157,26 +174,29 @@ class _AccountAPI implements AccountAPI {
   }
 
   @override
-  Future<ResponseModel> markAsFavorite({
-    required int accountId,
-    required String sessionId,
-    required Map<String, dynamic> favoriteRequest,
-  }) async {
+  Future<ResponseModel> markAsFavorite(
+      {required Map<String, dynamic> favoriteRequest}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(favoriteRequest);
-    final _options = _setStreamType<ResponseModel>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/account/${accountId}/favorite',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<ResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/account/{account_id}/favorite',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ResponseModel _value;
     try {
@@ -201,7 +221,10 @@ class _AccountAPI implements AccountAPI {
     return requestOptions;
   }
 
-  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

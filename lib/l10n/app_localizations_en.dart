@@ -12,6 +12,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchForMovie => 'Search for a movie';
 
   @override
+  String get appSettings => 'App Settings';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get setLanguage => 'Set Language';
+
+  @override
+  String get setTheme => 'Set Theme';
+
+  @override
   String get watchedMovies => 'Watched Movies';
 
   @override

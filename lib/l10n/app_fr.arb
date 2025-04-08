@@ -1,6 +1,9 @@
 {
     "searchForMovie": "Rechercher un film",
     "watchedMovies": "Films Vus",
+    "appSettings": "Paramètres de l'application",
+    "setLanguage": "Changer la langue",
+    "setTheme": "Changer le thème",
     "nowPlayingMovies": "Films en Cours",
     "upcomingMovies": "Films à venir",
     "signIn": "Connexion",
@@ -35,5 +38,6 @@
     "osVersion": "Version du système",
     "availableStorageSpace": "Espace de stockage disponible",
     "batteryLevel": "Niveau de batterie",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "error": "Erreur"
   }

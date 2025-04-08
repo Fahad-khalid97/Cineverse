@@ -7,9 +7,9 @@ part of 'session_model.dart';
 // **************************************************************************
 
 SessionModel _$SessionModelFromJson(Map<String, dynamic> json) => SessionModel(
-  success: json['success'] as bool,
-  sessionId: json['session_id'] as String,
-);
+      success: json['success'] as bool,
+      sessionId: json['session_id'] as String,
+    );
 
 Map<String, dynamic> _$SessionModelToJson(SessionModel instance) =>
     <String, dynamic>{

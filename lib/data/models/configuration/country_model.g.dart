@@ -7,9 +7,9 @@ part of 'country_model.dart';
 // **************************************************************************
 
 CountryModel _$CountryModelFromJson(Map<String, dynamic> json) => CountryModel(
-  iso: json['iso_3166_1'] as String,
-  englishName: json['english_name'] as String,
-);
+      iso: json['iso_3166_1'] as String,
+      englishName: json['english_name'] as String,
+    );
 
 Map<String, dynamic> _$CountryModelToJson(CountryModel instance) =>
     <String, dynamic>{

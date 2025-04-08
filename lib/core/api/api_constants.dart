@@ -7,6 +7,8 @@ class ApiConstants {
   static String get apiKey => EnvConfig.apiKey;
   static String get bearerToken => EnvConfig.bearerToken;
 
+  static int get timeOut => 30;
+
   // Image URLs
   static const String imageBaseUrl = 'https://image.tmdb.org/t/p/';
   static const String smallImageSize = 'w200';

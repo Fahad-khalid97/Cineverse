@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:linear_progress_bar/linear_progress_bar.dart';
 import '../../../../../../theme/app_colors.dart';
-import '../../../../../../theme/app_fonts.dart';
 
 class RatingProgressBar extends StatelessWidget {
   const RatingProgressBar({

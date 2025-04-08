@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:cineverse/data/models/media/movie_model.dart';
+import 'package:cineverse/widget/smart_widget/bottom_nav_bar/bottom_nav_bar.dart';
 
 @lazySingleton
 class AppRouter {
@@ -39,6 +40,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => MediaDetailScreen(movie: movie),
         );
+      case AppRoutes.bottomNav:
+        return MaterialPageRoute(builder: (_) => const BottomNavBar());
 
       default:
         return MaterialPageRoute(

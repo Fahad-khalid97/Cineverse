@@ -22,7 +22,7 @@ class CastMemberCard extends StatelessWidget {
             image: DecorationImage(
               image:
                   image.isEmpty
-                      ? const AssetImage(AppImage.cast)
+                      ? const AssetImage(AppImage.personAvatar)
                       : CachedNetworkImageProvider(
                         image,
                         cacheKey: '${image}cast',

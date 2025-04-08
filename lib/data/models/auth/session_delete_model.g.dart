@@ -7,9 +7,13 @@ part of 'session_delete_model.dart';
 // **************************************************************************
 
 DeleteSessionResponse _$DeleteSessionResponseFromJson(
-  Map<String, dynamic> json,
-) => DeleteSessionResponse(success: json['success'] as bool);
+        Map<String, dynamic> json) =>
+    DeleteSessionResponse(
+      success: json['success'] as bool,
+    );
 
 Map<String, dynamic> _$DeleteSessionResponseToJson(
-  DeleteSessionResponse instance,
-) => <String, dynamic>{'success': instance.success};
+        DeleteSessionResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };

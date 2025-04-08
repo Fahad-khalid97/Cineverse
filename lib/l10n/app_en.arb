@@ -3,6 +3,22 @@
     "@searchForMovie": {
       "description": "Placeholder text for movie search input"
     },
+    "appSettings": "App Settings",
+    "@appSettings": {
+      "description": "Text for app settings section"
+    },
+    "error": "Error",
+    "@error": {
+      "description": "Text for error section"
+    },
+    "setLanguage": "Set Language",
+    "@setLanguage": {
+      "description": "Text for set language section"
+    },
+    "setTheme": "Set Theme",
+    "@setTheme": {
+      "description": "Text for set theme section"
+    },
     "watchedMovies": "Watched Movies",
     "@watchedMovies": {
       "description": "Text for watched movies section"

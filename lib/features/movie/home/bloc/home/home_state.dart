@@ -38,15 +38,11 @@ final class HomeLoadingState extends HomeState {
 }
 
 final class HomeLoadedState extends HomeState {
-  final List<MovieModel> movies;
-  final List<GenreModel> genres;
-  final int page;
-
   const HomeLoadedState({
-    required this.movies,
-    required this.genres,
-    required this.page,
-  }) : super(movies: movies, genres: genres, page: page);
+    required super.movies,
+    required super.genres,
+    required super.page,
+  });
 
   HomeLoadedState copyWith({
     List<MovieModel>? movies,

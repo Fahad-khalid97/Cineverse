@@ -4,6 +4,7 @@ import 'home_state.dart';
 import 'package:cineverse/di/di.dart';
 import 'package:injectable/injectable.dart';
 import 'package:cineverse/data/models/genre/genre_model.dart';
+import 'package:dio/dio.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
@@ -33,11 +34,11 @@ class HomeCubit extends Cubit<HomeState> {
           page: reset ? 1 : state.page + 1,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
       // Emit error state with current data preserved
       emit(
         HomeErrorState(
-          error: e.toString(),
+          error: e.error.toString(),
           movies: state.movies,
           genres: state.genres,
           page: state.page,
@@ -68,11 +69,11 @@ class HomeCubit extends Cubit<HomeState> {
           page: reset ? 1 : state.page + 1,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
       // Emit error state with current data preserved
       emit(
         HomeErrorState(
-          error: e.toString(),
+          error: e.error.toString(),
           movies: state.movies,
           genres: state.genres,
           page: state.page,
@@ -93,10 +94,10 @@ class HomeCubit extends Cubit<HomeState> {
           page: state.page,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
       emit(
         HomeErrorState(
-          error: e.toString(),
+          error: e.error.toString(),
           movies: state.movies,
           genres: state.genres,
           page: state.page,
@@ -117,10 +118,10 @@ class HomeCubit extends Cubit<HomeState> {
           page: state.page,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
       emit(
         HomeErrorState(
-          error: e.toString(),
+          error: e.error.toString(),
           movies: state.movies,
           genres: state.genres,
           page: state.page,
@@ -148,10 +149,10 @@ class HomeCubit extends Cubit<HomeState> {
           page: reset ? 1 : state.page + 1,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
       emit(
         HomeErrorState(
-          error: e.toString(),
+          error: e.error.toString(),
           movies: state.movies,
           genres: state.genres,
           page: state.page,
@@ -179,10 +180,10 @@ class HomeCubit extends Cubit<HomeState> {
           page: reset ? 1 : state.page + 1,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
       emit(
         HomeErrorState(
-          error: e.toString(),
+          error: e.error.toString(),
           movies: state.movies,
           genres: state.genres,
           page: state.page,

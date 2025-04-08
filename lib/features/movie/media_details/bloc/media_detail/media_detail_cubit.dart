@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'media_detail_state.dart';
 import 'package:cineverse/di/di.dart';
 import 'package:injectable/injectable.dart';
+import 'package:dio/dio.dart';
 
 @injectable
 class MediaDetailCubit extends Cubit<MediaDetailState> {
@@ -59,7 +60,7 @@ class MediaDetailCubit extends Cubit<MediaDetailState> {
           authorDetails: authorDetails,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
       emit(
         MediaDetailError(
           movie: MovieDetailsModel(),
@@ -68,7 +69,7 @@ class MediaDetailCubit extends Cubit<MediaDetailState> {
           cast: [],
           crew: [],
           rating: state.rating,
-          error: e.toString(),
+          error: e.error.toString(),
         ),
       );
     }
@@ -114,7 +115,7 @@ class MediaDetailCubit extends Cubit<MediaDetailState> {
           authorDetails: authorDetails,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
       emit(
         MediaDetailError(
           movie: MovieDetailsModel(),
@@ -123,7 +124,7 @@ class MediaDetailCubit extends Cubit<MediaDetailState> {
           cast: [],
           crew: [],
           rating: state.rating,
-          error: e.toString(),
+          error: e.error.toString(),
         ),
       );
     }

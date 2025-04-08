@@ -7,10 +7,10 @@ part of 'auth_resp.dart';
 // **************************************************************************
 
 AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
-  success: json['success'] as bool,
-  expiresAt: json['expires_at'] as String,
-  requestToken: json['request_token'] as String,
-);
+      success: json['success'] as bool,
+      expiresAt: json['expires_at'] as String,
+      requestToken: json['request_token'] as String,
+    );
 
 Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
     <String, dynamic>{

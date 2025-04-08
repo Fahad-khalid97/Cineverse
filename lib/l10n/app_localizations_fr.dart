@@ -12,6 +12,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchForMovie => 'Rechercher un film';
 
   @override
+  String get appSettings => 'Paramètres de l\'application';
+
+  @override
+  String get error => 'Erreur';
+
+  @override
+  String get setLanguage => 'Changer la langue';
+
+  @override
+  String get setTheme => 'Changer le thème';
+
+  @override
   String get watchedMovies => 'Films Vus';
 
   @override

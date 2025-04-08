@@ -8,11 +8,12 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../bloc/home/home_cubit.dart';
 import '../bloc/home/home_state.dart';
 import 'package:cineverse/l10n/app_localizations.dart';
-import 'package:cineverse/features/movie/media_details/view/movie_details_screen.dart';
 import '../widget/dumb_widget/movie_card_widget.dart';
 import '../../../../widget/dumb_widget/error_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:cineverse/data/models/genre/genre_model.dart';
+import 'package:cineverse/core/routes/app_routes.dart';
+import '../../../../widget/dumb_widget/custom_message_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   final String type;
@@ -99,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         selectedGenres.add(genre);
       }
+      searchController.text = '';
     });
     if (widget.type == 'movie') {
       context.read<HomeCubit>().loadMovies(reset: true, genres: selectedGenres);
@@ -182,6 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               context.read<HomeCubit>().loadMovies();
                             },
                           )
+                          : state is HomeLoadedState &&
+                              state.movies.isEmpty &&
+                              state.genres.isNotEmpty
+                          ? CustomMessageWidget(message: 'No movies found')
                           : Skeletonizer(
                             enabled: state is HomeLoadingState,
                             child: GridView.builder(
@@ -199,15 +205,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 final movie = state.movies[index];
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
+                                    Navigator.pushNamed(
                                       context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) => MediaDetailScreen(
-                                              type: widget.type,
-                                              movie: movie,
-                                            ),
-                                      ),
+                                      AppRoutes.movieDetails,
+                                      arguments: {
+                                        'movie': movie,
+                                        'type': widget.type,
+                                      },
                                     );
                                   },
                                   child: MovieCardWidget(movie: movie),

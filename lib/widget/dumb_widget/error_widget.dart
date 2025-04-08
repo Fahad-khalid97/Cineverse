@@ -1,3 +1,4 @@
+import 'package:cineverse/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,11 +18,15 @@ class CustomErrorWidget extends StatelessWidget {
         spacing: 16.h,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Error', style: Theme.of(context).textTheme.headlineSmall),
+          Text(
+            AppLocalizations.of(context)!.error,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
 
           Text(
             error.toString(),
             maxLines: 3,
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
 

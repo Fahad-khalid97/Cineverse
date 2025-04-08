@@ -2,6 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../data/repo/auth_repo.dart';
 import 'login_state.dart';
+import 'package:cineverse/core/api/dio_client.dart';
+import 'package:cineverse/di/di.dart';
+import 'package:dio/dio.dart';
 
 @injectable
 class LoginCubit extends Cubit<LoginState> {
@@ -10,6 +13,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._authRepo) : super(LoginInitial());
 
   Future<void> login({required String email, required String password}) async {
+    final dioClient = getIt<DioClient>();
     try {
       emit(LoginLoading());
       final requestTokenResponse = await _authRepo.createRequestToken();
@@ -33,14 +37,16 @@ class LoginCubit extends Cubit<LoginState> {
         'request_token': validateResponse.requestToken,
       });
 
+      dioClient.sessionId = sessionResponse.sessionId;
+
       if (!sessionResponse.success) {
         emit(LoginError(message: 'Failed to create session'));
         return;
       }
 
       emit(LoginSuccess());
-    } catch (e) {
-      emit(LoginError(message: e.toString()));
+    } on DioException catch (e) {
+      emit(LoginError(message: e.error.toString()));
     }
   }
 
