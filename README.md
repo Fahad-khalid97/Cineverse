@@ -22,6 +22,7 @@
 - ❤️ Favorites and Watchlist management
 - 🎭 Genre-based filtering for easy discovery
 - 🌓 Dark mode toggle for comfortable viewing
+- ⚡ Dart Isolates for background rating calculations
 
 ---
 
