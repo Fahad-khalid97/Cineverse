@@ -8,8 +8,6 @@
 
 ---
 
----
-
 ## 🚀 Features
 
 - 🎬 Explore popular and top-rated movies
@@ -61,7 +59,7 @@ lib/
 | Persistence | objectbox, flutter_secure_storage, shared_preferences |
 | UI/UX | flutter_screenutil, skeletonizer, cached_network_image, animated_splash_screen, linear_progress_bar, custom_rating_bar |
 | Fonts & Icons | google_fonts, font_awesome_flutter |
-| Localization | flutter_localization, intl |
+| Localization | flutter_localization |
 | Utilities | easy_debounce |
 
 ---
