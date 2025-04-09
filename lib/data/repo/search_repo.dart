@@ -1,8 +1,8 @@
-import 'package:cineverse/data/datasource/remote/search_api.dart';
+import 'package:cineverse/features/movie/home/api/search_api.dart';
 import 'package:injectable/injectable.dart';
 
 import '../models/account/movie_list_resp.dart';
-import '../models/genre/genre_resp_model.dart';
+import '../../features/movie/home/model/genre_resp_model.dart';
 
 @lazySingleton
 class SearchRepo {

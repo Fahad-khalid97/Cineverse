@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HomeCubit()),
-        BlocProvider(create: (context) => ProfileCubit()),
+        BlocProvider(create: (context) => getIt<HomeCubit>()),
+        BlocProvider(create: (context) => getIt<ProfileCubit>()),
         BlocProvider(create: (context) => getIt<LoginCubit>()),
-        BlocProvider(create: (context) => MyListCubit()),
-        BlocProvider(create: (context) => MediaDetailCubit()),
+        BlocProvider(create: (context) => getIt<MyListCubit>()),
+        BlocProvider(create: (context) => getIt<MediaDetailCubit>()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

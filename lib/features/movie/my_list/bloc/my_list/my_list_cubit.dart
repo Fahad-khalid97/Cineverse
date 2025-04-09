@@ -3,7 +3,9 @@ import 'package:cineverse/data/repo/media_repo.dart';
 import 'package:cineverse/di/di.dart';
 import 'my_list_state.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class MyListCubit extends Cubit<MyListState> {
   MyListCubit()
     : super(

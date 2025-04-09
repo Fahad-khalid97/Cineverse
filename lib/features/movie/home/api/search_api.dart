@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:cineverse/core/api/api_constants.dart';
 
-import '../../models/account/movie_list_resp.dart';
-import '../../models/genre/genre_resp_model.dart';
+import '../../../../data/models/account/movie_list_resp.dart';
+import '../model/genre_resp_model.dart';
 
 part 'search_api.g.dart';
 

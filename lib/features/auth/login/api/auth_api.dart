@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:cineverse/core/api/api_constants.dart';
-import 'package:cineverse/data/models/auth/session_model.dart';
+import 'package:cineverse/features/auth/login/model/session_model.dart';
 
-import '../../../../data/models/auth/auth_resp.dart';
-import '../../../../data/models/auth/session_delete_model.dart';
+import '../model/auth_resp.dart';
+import '../model/session_delete_model.dart';
 
 part 'auth_api.g.dart';
 

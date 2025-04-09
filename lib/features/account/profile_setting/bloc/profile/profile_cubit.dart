@@ -11,7 +11,9 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cineverse/data/repo/auth_repo.dart';
 import 'package:cineverse/core/api/api_constants.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit()
     : super(
